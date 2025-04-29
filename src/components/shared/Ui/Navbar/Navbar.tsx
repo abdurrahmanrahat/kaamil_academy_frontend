@@ -13,7 +13,7 @@ import { navItems } from "./navbar.utils";
 // import { useAppSelector } from "@/redux/hooks";
 // import { useCurrentUser } from "@/redux/reducers/authSlice";
 
-const Navbar2 = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -181,4 +181,4 @@ const Navbar2 = () => {
   );
 };
 
-export default Navbar2;
+export default Navbar;
