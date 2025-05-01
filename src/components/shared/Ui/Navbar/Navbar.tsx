@@ -117,7 +117,9 @@ const Navbar = () => {
           {/* login/logout button */}
           <div className="flex items-center gap-4">
             <Sun />
-            <Button>Login</Button>
+            <Link href={`/login`}>
+              <Button className="cursor-pointer">Login</Button>
+            </Link>
           </div>
         </div>
 
