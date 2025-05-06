@@ -9,5 +9,5 @@
 }
 
 .loading-spin-slow {
-    animation: spin-slow 3s linear infinite;
+    animation: spin-slow 1.7s linear infinite;
 }

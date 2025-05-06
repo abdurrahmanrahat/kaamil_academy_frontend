@@ -1,28 +1,45 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { authKey } from "@/constants/authKey";
 import { IMAGES } from "@/image-data";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, useCurrentUser } from "@/redux/reducers/authSlice";
+import { removeUser } from "@/services/auth.services";
+import axios from "axios";
 import { Menu, Sun, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ActiveLink from "../ActiveLink";
 import Container from "../Container";
 import { navItems } from "./navbar.utils";
-// import { useAppSelector } from "@/redux/hooks";
-// import { useCurrentUser } from "@/redux/reducers/authSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  // const user = useAppSelector(useCurrentUser);
+  const user = useAppSelector(useCurrentUser);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  // const isAdmin = user?.role === "admin";
-  // const isInstructor = user?.role === "instructor";
-  // const isStudent = user?.role === "user";
+  const isAdmin = user?.role === "admin";
+  const isStudent = user?.role === "user";
+
+  // logout user
+  const handleLogout = async () => {
+    // 🎯 remove HttpOnly cookie from client via API
+    await axios.post("/api/auth/remove-cookies", {
+      accessToken: authKey,
+      // refreshToken: "testToken", // send more name for removing
+    });
+    dispatch(logout());
+    removeUser();
+
+    router.push("/");
+  };
 
   // close menu when clicking outside
   useEffect(() => {
@@ -85,41 +102,43 @@ const Navbar = () => {
               ))}
             </>
 
-            {/* <>
-                  {user && (
-                    <>
-                      {isAdmin && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/admin"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                      {isInstructor && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/instructor"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                      {isStudent && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/user"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                    </>
+            <>
+              {user && (
+                <>
+                  {isAdmin && (
+                    <ActiveLink href={`/dashboard/admin`}>
+                      <span className="font-medium transition-colors duration-300 hover:text-primary">
+                        Dashboard
+                      </span>
+                    </ActiveLink>
                   )}
-                </> */}
+
+                  {isStudent && (
+                    <ActiveLink href={`/dashboard/user`}>
+                      <span className="font-medium transition-colors duration-300 hover:text-primary">
+                        Dashboard
+                      </span>
+                    </ActiveLink>
+                  )}
+                </>
+              )}
+            </>
           </div>
 
           {/* login/logout button */}
           <div className="flex items-center gap-4">
             <Sun />
-            <Link href={`/login`}>
-              <Button className="cursor-pointer">Login</Button>
-            </Link>
+            <>
+              {user ? (
+                <Button className="cursor-pointer" onClick={handleLogout}>
+                  Logout
+                </Button>
+              ) : (
+                <Link href={`/login`}>
+                  <Button className="cursor-pointer">Login</Button>
+                </Link>
+              )}
+            </>
           </div>
         </div>
 
@@ -148,33 +167,27 @@ const Navbar = () => {
                 ))}
               </>
 
-              {/* <>
-                  {user && (
-                    <>
-                      {isAdmin && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/admin"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                      {isInstructor && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/instructor"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                      {isStudent && (
-                        <NavItem
-                          exact={false}
-                          href={"/dashboard/user"}
-                          label={"Dashboard"}
-                        />
-                      )}
-                    </>
-                  )}
-                </> */}
+              <>
+                {user && (
+                  <>
+                    {isAdmin && (
+                      <ActiveLink href={`/dashboard/admin`}>
+                        <span className="font-medium transition-colors duration-300 hover:text-primary">
+                          Dashboard
+                        </span>
+                      </ActiveLink>
+                    )}
+
+                    {isStudent && (
+                      <ActiveLink href={`/dashboard/user`}>
+                        <span className="font-medium transition-colors duration-300 hover:text-primary">
+                          Dashboard
+                        </span>
+                      </ActiveLink>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
         </div>
