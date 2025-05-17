@@ -4,6 +4,7 @@
 @theme {
   /* make it 100 - 900 variants for primary color */
   --color-primary: #007F00;
+  --color-secondary: #006600;
   /* --color-primary: #008000; */
   /* --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 120rem; */
