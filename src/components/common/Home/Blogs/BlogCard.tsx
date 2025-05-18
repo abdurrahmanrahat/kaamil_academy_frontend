@@ -35,7 +35,7 @@ export function BlogCard({ blog }: BlogCardProps) {
         </h3>
         <p className="text-muted-foreground text-sm">{truncatedDescription}</p>
       </CardContent>
-      <div className="px-4 pt-0">
+      <div className="px-4 pt-0 pb-4">
         <button className="text-sm font-medium text-primary cursor-pointer">
           আরও পড়ুন
         </button>

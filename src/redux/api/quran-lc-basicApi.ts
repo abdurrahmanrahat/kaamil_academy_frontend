@@ -5,7 +5,7 @@ const quranLCBasicApi = baseApi.injectEndpoints({
     getQuranLCBasicStudents: builder.query({
       query: (args: Record<string, any>) => {
         return {
-          url: "/quran-lc-basic",
+          url: "/quran-lc-basic-students",
           method: "GET",
           params: args,
         };
@@ -14,14 +14,14 @@ const quranLCBasicApi = baseApi.injectEndpoints({
     }),
     getSingleQuranLCBasicStudent: builder.query({
       query: (studentId: string) => ({
-        url: `/quran-lc-basic/${studentId}`,
+        url: `/quran-lc-basic-students/${studentId}`,
         method: "GET",
       }),
       providesTags: ["quran-lc-basic"],
     }),
     addQuranLCBasicStudent: builder.mutation({
       query: (studentInfo) => ({
-        url: "/quran-lc-basic/create-quran-lc-basic",
+        url: "/quran-lc-basic-students/create-quran-lc-basic-student",
         method: "POST",
         body: studentInfo,
       }),
@@ -30,7 +30,7 @@ const quranLCBasicApi = baseApi.injectEndpoints({
     updateQuranLCBasicStudent: builder.mutation({
       query: (payload) => {
         return {
-          url: `/quran-lc-basic/${payload.studentId}`,
+          url: `/quran-lc-basic-students/${payload.studentId}`,
           method: "PATCH",
           body: payload.updatedData,
         };
@@ -39,7 +39,7 @@ const quranLCBasicApi = baseApi.injectEndpoints({
     }),
     deleteQuranLCBasicStudent: builder.mutation({
       query: (studentId) => ({
-        url: `/quran-lc-basic/${studentId}`,
+        url: `/quran-lc-basic-students/${studentId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["quran-lc-basic"],

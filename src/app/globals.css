@@ -12,3 +12,35 @@
   --shadow-cardLightShadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
   --shadow-topUpShadow: 0 5px 20px rgba(0, 0, 0, .2)
 }
+
+
+/* mui date picker css override */
+.MuiPickersTextField-root {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  border-color: #000 !important;
+  margin-top: 2px !important;
+}
+
+.MuiPickersTextField-root fieldset {
+  border-color: #000 !important;
+}
+
+.MuiPickersTextField-root:hover fieldset {
+  border-color: #000 !important;
+}
+
+.MuiPickersTextField-root.Mui-focused fieldset {
+  border-color: #000 !important;
+}
+
+.MuiPickersTextField-root input {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.MuiPickersSectionList-root {
+
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
