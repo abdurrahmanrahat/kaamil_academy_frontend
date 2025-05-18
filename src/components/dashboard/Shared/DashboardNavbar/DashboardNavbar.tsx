@@ -1,6 +1,8 @@
 "use client";
 
+import { IMAGES } from "@/image-data";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -48,12 +50,16 @@ export default function DashboardNavbar({
   return (
     <div>
       <div className="w-full">
-        <div className="lg:hidden">
+        <div className="lg:hidden border-b border-gray-200">
           <div className="w-[90%] mx-auto flex justify-between py-4">
             <div className="">
               <Link href="/">
-                {/* <Image src={IMAGES.shared.Logo} alt="Logo" /> */}
-                <h2 className="text-xl font-semibold">Brand Logo</h2>
+                <Image
+                  src={IMAGES.shared.Logo}
+                  alt="kaamil_academy"
+                  width={180}
+                  height={80}
+                />
               </Link>
             </div>
 
