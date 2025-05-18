@@ -1,33 +1,48 @@
 import {
+  BookOpen,
   LayoutDashboard,
-  MessageCircle,
+  List,
   MessageSquarePlus,
   Settings,
-  ShoppingCart,
+  Upload,
   Users,
 } from "lucide-react";
 
 export const userSidebarItems = [
   { text: "Dashboard", href: "/dashboard/user", icon: LayoutDashboard },
   {
-    text: "Products",
+    text: "My Courses",
     href: "/dashboard/user/cart-products",
-    icon: ShoppingCart,
+    icon: BookOpen,
   },
-  { text: "Contact", href: "/contact/user/contact", icon: MessageCircle },
 ];
 
 export const adminSidebarItems = [
   { text: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
   {
-    text: "Add Product",
-    href: "/dashboard/admin/add-product",
+    text: "Add Blog",
+    href: "/dashboard/admin/add-blog",
+    icon: Upload,
+  },
+  {
+    text: "Add Course",
+    href: "/dashboard/admin/add-course",
     icon: MessageSquarePlus,
   },
   {
-    text: "Manage Products",
-    href: "/dashboard/admin/manage-products",
+    text: "Manage Courses",
+    href: "/dashboard/admin/manage-courses",
     icon: Settings,
+  },
+  {
+    text: "Manage Blogs",
+    href: "/dashboard/admin/manage-blogs",
+    icon: List,
+  },
+  {
+    text: "Quran LC Basic Students",
+    href: "/dashboard/admin/manage-quran-lc-basic-students",
+    icon: Users,
   },
   { text: "Manage Users", href: "/dashboard/admin/manage-users", icon: Users },
 ];

@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import { SidebarItem } from "../Sidebar/Sidebar.helpers";
 import { adminSidebarItems, userSidebarItems } from "../Sidebar/sidebar.utils";
@@ -14,6 +15,8 @@ export default function DashboardNavbar({
   children: ReactNode;
 }) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const pathname = usePathname();
 
   // Toggle function to handle the navbar's display
   const handleNavToggle = () => {
@@ -36,6 +39,11 @@ export default function DashboardNavbar({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpenMenu]);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpenMenu(false);
+  }, [pathname]);
 
   return (
     <div>

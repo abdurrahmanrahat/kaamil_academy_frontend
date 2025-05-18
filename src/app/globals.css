@@ -44,3 +44,30 @@
   padding-top: 9px !important;
   padding-bottom: 9px !important;
 }
+
+/* For WebKit browsers (Chrome, Safari, newer versions of Opera) */
+::-webkit-scrollbar {
+  width: 8px;
+  /* height: 8px; */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007F00;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #007F00;
+}
+
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #007F00 #f1f1f1;
+}
