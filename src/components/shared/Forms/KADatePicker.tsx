@@ -19,7 +19,10 @@ const KADatePicker = ({
   className = "",
   placeholder = "Pick a date",
 }: TKADatePickerProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -62,6 +65,11 @@ const KADatePicker = ({
           />
         )}
       />
+      {errors[name] && (
+        <p className="text-red-500 text-sm mt-1">
+          {(errors[name]?.message as string) || "Invalid input"}
+        </p>
+      )}
     </LocalizationProvider>
   );
 };

@@ -10,6 +10,8 @@ import "./globals.css";
 //   display: "swap",
 // });
 
+// Tiro bangla
+
 const notoBengali = Noto_Sans_Bengali({
   subsets: ["bengali"],
   weight: ["400", "500", "600", "700", "800"], // as needed

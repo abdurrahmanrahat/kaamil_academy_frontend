@@ -16,7 +16,7 @@ const Sidebar = ({ role }: { role: "user" | "admin" }) => {
           <div className="flex justify-center items-center pt-6">
             <Link href="/">
               <Image
-                src={IMAGES.shared.Logo}
+                src={IMAGES.shared.WhiteLogo}
                 alt="kaamil_academy"
                 width={180}
                 height={80}

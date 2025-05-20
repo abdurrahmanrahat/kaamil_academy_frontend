@@ -24,7 +24,7 @@ const QuranLCBasicRegistrationSuccessPage = () => {
   if (!isValidSecret) {
     return (
       <Container>
-        <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-red-50 to-white">
+        <div className="min-h-screen flex items-center justify-center p-4">
           <Card className="w-full max-w-2xl border-red-200 shadow-xl">
             <CardHeader className="text-center pb-2">
               <div className="bg-red-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -59,8 +59,8 @@ const QuranLCBasicRegistrationSuccessPage = () => {
 
   return (
     <Container>
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-green-50 to-white">
-        <Card className="w-full max-w-2xl border-green-200 shadow-xl overflow-hidden p-0">
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="w-full max-w-2xl border-green-200 shadow-cardLightShadow overflow-hidden p-0">
           {/* Success Banner */}
           <div className="bg-green-600 text-white py-6 px-8 text-center relative">
             <div className="absolute top-0 left-0 w-full h-full opacity-10">

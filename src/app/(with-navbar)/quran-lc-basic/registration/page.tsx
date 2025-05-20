@@ -14,7 +14,6 @@ import { z } from "zod";
 
 const quranLCBasicRegistrationSchema = z.object({
   userName: z.string().min(1, "আপনার নাম আবশ্যক"),
-  userEmail: z.string().email("সঠিক ইমেইল দিন"),
   userGender: z.enum(["male", "female"], {
     errorMap: () => ({ message: "জেন্ডার নির্বাচন করুন" }),
   }),
@@ -31,7 +30,6 @@ const quranLCBasicRegistrationSchema = z.object({
 
 const quranLCBasicRegistrationDefaultValues = {
   userName: "",
-  userEmail: "",
   userGender: "",
   dateOfBirth: "",
   profession: "",
@@ -94,27 +92,11 @@ const QuranLCBasicRegistration = () => {
               <KAInput name="userName" className="" placeholder="" />
             </div>
 
-            {/* email */}
-            <div>
-              <label
-                htmlFor="userEmail"
-                className="block text-start font-medium mb-[2px]"
-              >
-                ইমেইল লিখুন *
-              </label>
-              <KAInput
-                name="userEmail"
-                type="email"
-                className=""
-                placeholder=""
-              />
-            </div>
-
             {/* gander */}
             <div>
               <label
                 htmlFor="userGender"
-                className="block text-start font-medium mb-[4px]"
+                className="block text-start font-medium mb-[2px]"
               >
                 জেন্ডার <span className="text-red-600 font-semibold">*</span>
               </label>
@@ -217,7 +199,7 @@ const QuranLCBasicRegistration = () => {
               <div>
                 <label
                   htmlFor="paymentMethod"
-                  className="block text-start font-medium mb-[4px]"
+                  className="block text-start font-medium mb-[2px]"
                 >
                   আপনি কোন মাধ্যমে ফি পাঠিয়েছেন?{" "}
                   <span className="text-red-600 font-semibold">*</span>

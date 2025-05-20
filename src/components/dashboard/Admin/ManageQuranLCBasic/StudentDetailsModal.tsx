@@ -12,15 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TQuranLCBasic } from "@/types/quran-lc-basic.type";
-import {
-  Briefcase,
-  Calendar,
-  Info,
-  Mail,
-  MapPin,
-  Phone,
-  User2,
-} from "lucide-react";
+import { Briefcase, Calendar, Info, MapPin, Phone, User2 } from "lucide-react";
 
 const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
   return (
@@ -53,7 +45,7 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
+                {/* <div className="flex items-start gap-4">
                   <Mail className="h-5 w-5 mt-1" />
                   <div className="space-y-1">
                     <p className="text-sm font-medium leading-none">Email</p>
@@ -61,7 +53,7 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                       {student.userEmail}
                     </p>
                   </div>
-                </div>
+                </div> */}
                 <div className="flex items-start gap-4">
                   <Calendar className="h-5 w-5 mt-1" />
                   <div className="space-y-1">
@@ -131,20 +123,22 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="rounded-lg border p-4 space-y-2 bg-gradient-to-br from-indigo-50 to-blue-50">
+                  <div className="space-y-2">
                     <p className="text-base font-semibold">Payment Details</p>
-                    <p className="text-sm text-muted-foreground capitalize">
-                      Method:{" "}
-                      <span className="text-gray-700 uppercase">
-                        {student.paymentMethod}
-                      </span>
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Pay Digits:{" "}
-                      <span className="text-gray-700">
-                        {student.RegFeeNumber}
-                      </span>
-                    </p>
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground capitalize">
+                        Method:{" "}
+                        <span className="text-gray-700 uppercase">
+                          {student.paymentMethod}
+                        </span>
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Pay Digits:{" "}
+                        <span className="text-gray-700">
+                          {student.RegFeeNumber}
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -12,12 +12,12 @@ import { useCallback, useEffect, useState } from "react";
 const banners = [
   {
     id: 1,
-    src: IMAGES.home.Banner1,
+    src: IMAGES.home.Banner2,
     alt: "Banner 1",
   },
   {
     id: 2,
-    src: IMAGES.home.Banner2,
+    src: IMAGES.home.Banner1,
     alt: "Banner 2",
   },
   {

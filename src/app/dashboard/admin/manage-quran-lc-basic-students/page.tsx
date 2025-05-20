@@ -108,7 +108,7 @@ const ManageQuranLSStudent = () => {
           </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-center md:justify-end">
           {/* batch no filtering */}
           <Select
             onValueChange={(currBatch) => handleSelectUserBatchNo(currBatch)}

@@ -145,7 +145,7 @@ const Navbar = () => {
         {/* mobile menu dropdown */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden absolute left-0 bg-white w-full z-[999] ${
-            isOpen ? "opacity-100" : "opacity-0"
+            isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"
           } border-b border-gray-200`}
         >
           <div className="w-[90%] mx-auto py-4">

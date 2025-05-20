@@ -1,7 +1,6 @@
 export type TQuranLCBasic = {
   _id: string;
   userName: string;
-  userEmail: string;
   userGender: "male" | "female";
   dateOfBirth: string; // Consider Date if using JS Date object elsewhere
   profession: string;

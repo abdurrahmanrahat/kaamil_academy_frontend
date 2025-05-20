@@ -13,6 +13,9 @@
   --shadow-topUpShadow: 0 5px 20px rgba(0, 0, 0, .2)
 }
 
+/* body {
+  background-color: black;
+} */
 
 /* mui date picker css override */
 .MuiPickersTextField-root {
