@@ -1,4 +1,5 @@
 import Container from "@/components/shared/Ui/Container";
+import SectionTitle from "@/components/shared/Ui/SectionTitle";
 import { BlogCard } from "./BlogCard";
 
 const blogs = [
@@ -27,12 +28,9 @@ const blogs = [
 
 const Blogs = () => {
   return (
-    <Container className="py-12 lg:py-16 mt-12 lg:mt-16">
-      <div className="flex justify-center items-center mb-12">
-        <h2 className="text-3xl lg:text-4xl font-semibold text-primary">
-          ইসলামিক ব্লগ
-        </h2>
-      </div>
+    <Container className="py-16 lg:py-24">
+      <SectionTitle text="ইসলামিক ব্লগ" />
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {blogs.map((blog) => (
           <BlogCard key={blog._id} blog={blog} />
