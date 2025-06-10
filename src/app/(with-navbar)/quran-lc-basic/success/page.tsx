@@ -104,7 +104,10 @@ const QuranLCBasicRegistrationSuccessPage = () => {
                   <p className="text-sm text-gray-500 mb-4">
                     ছেলেদের জন্য নির্ধারিত WhatsApp গ্রুপে যোগ দিন এবং আপডেট পান
                   </p>
-                  <Link href="#" target="_blank">
+                  <Link
+                    href="https://chat.whatsapp.com/L6AwvQkar2yE1wXOjyE1sy"
+                    target="_blank"
+                  >
                     <Button className="w-full cursor-pointer">
                       গ্রুপে যোগ দিন
                     </Button>
@@ -126,7 +129,10 @@ const QuranLCBasicRegistrationSuccessPage = () => {
                     মেয়েদের জন্য নির্ধারিত WhatsApp গ্রুপে যোগ দিন এবং আপডেট
                     পান
                   </p>
-                  <Link href="#" target="_blank">
+                  <Link
+                    href="https://chat.whatsapp.com/I12CDhv0aSwLk6p7qpYVyz"
+                    target="_blank"
+                  >
                     <Button className="w-full cursor-pointer">
                       গ্রুপে যোগ দিন
                     </Button>

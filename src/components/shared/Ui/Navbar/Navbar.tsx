@@ -67,7 +67,7 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex gap-2">
             {/* mobile menu toggle */}
-            <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+            <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (
                 <X className="w-6 h-6 transition-all duration-300" />
               ) : (
@@ -87,7 +87,7 @@ const Navbar = () => {
           </div>
 
           {/* desktop navigation */}
-          <div className="hidden md:flex md:items-center md:gap-6">
+          <div className="hidden lg:flex lg:items-center lg:gap-6">
             <>
               {navItems.map((item, index) => (
                 <ActiveLink
@@ -144,7 +144,7 @@ const Navbar = () => {
 
         {/* mobile menu dropdown */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden absolute left-0 bg-white w-full z-[999] ${
+          className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden absolute left-0 bg-white w-full z-[999] ${
             isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"
           } border-b border-gray-200`}
         >

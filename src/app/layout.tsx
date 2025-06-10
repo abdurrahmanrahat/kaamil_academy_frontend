@@ -1,6 +1,6 @@
 import Providers from "@/lib/providers/Providers";
 import type { Metadata } from "next";
-import { Noto_Sans_Bengali } from "next/font/google";
+import { Tiro_Bangla } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
@@ -12,9 +12,13 @@ import "./globals.css";
 
 // Tiro bangla
 
-const notoBengali = Noto_Sans_Bengali({
+// const notoBengali = Noto_Sans_Bengali({
+//   subsets: ["bengali"],
+//   weight: ["400", "500", "600", "700", "800"], // as needed
+// });
+const tiroBangla = Tiro_Bangla({
   subsets: ["bengali"],
-  weight: ["400", "500", "600", "700", "800"], // as needed
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoBengali.className} antialiased`}
+        className={`${tiroBangla.className} antialiased`}
         suppressHydrationWarning
       >
         <Providers>
