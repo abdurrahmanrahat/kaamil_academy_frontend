@@ -75,10 +75,10 @@ export default function Banner2() {
   return (
     <section className="lg:min-h-[90vh] flex justify-center items-center py-8 md:py-12 lg:py-0">
       <Container className="">
-        <div className="lg:flex flex-row-reverse gap-4">
+        <div className="lg:flex lg:flex-row-reverse lg:items-center gap-4">
           {/* Slider Column */}
           <div className="lg:w-1/2 relative pb-12 lg:pb-0">
-            <Card className="overflow-hidden border-0 bg-white/80 backdrop-blur-sm rounded-md">
+            <Card className="overflow-hidden border-0 backdrop-blur-sm rounded-md">
               <CardContent className="p-0">
                 <div className="h-[160px] md:h-[300px] lg:h-[300px]">
                   {slides.map((slide, index) => (
