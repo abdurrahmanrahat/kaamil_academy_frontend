@@ -6,22 +6,23 @@ import { Card, CardContent } from "@/components/ui/card";
 import { IMAGES } from "@/image-data";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const slides = [
   {
     id: 1,
-    src: IMAGES.home.Banner2,
+    src: IMAGES.home.Banner1,
     alt: "Banner 1",
   },
   {
     id: 2,
-    src: IMAGES.home.Banner1,
+    src: IMAGES.home.Banner3,
     alt: "Banner 2",
   },
   {
     id: 3,
-    src: IMAGES.home.Banner3,
+    src: IMAGES.home.Banner2,
     alt: "Banner 3",
   },
   {
@@ -73,7 +74,7 @@ export default function Banner2() {
   //   };
 
   return (
-    <section className="lg:min-h-[90vh] flex justify-center items-center py-8 md:py-12 lg:py-0">
+    <section className="lg:min-h-[90vh] flex justify-center items-center py-12 md:py-16 lg:py-0">
       <Container className="">
         <div className="lg:flex lg:flex-row-reverse lg:items-center gap-4">
           {/* Slider Column */}
@@ -122,12 +123,12 @@ export default function Banner2() {
                 </div>
 
                 {/* Slide Indicators */}
-                <div className="flex justify-center space-x-2 py-1 absolute bottom-2 left-1/2 transform -translate-x-1/2">
+                <div className="flex justify-center space-x-2 py-1 absolute bottom-1 left-1/2 transform -translate-x-1/2">
                   {slides.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
-                      className={`h-2 w-8 rounded-full transition-all duration-300 cursor-pointer ${
+                      className={`h-[4px] w-5 md:h-[6px] md:w-7 rounded-full transition-all duration-300 cursor-pointer ${
                         index === currentSlide
                           ? "bg-primary"
                           : "bg-primary/70 hover:bg-primary"
@@ -168,12 +169,16 @@ export default function Banner2() {
 
             {/* Action Buttons */}
             <div className="flex  gap-4">
-              <Button size="lg" className="">
-                কোর্স দেখুন
-              </Button>
-              <Button variant="outline" size="lg" className="">
-                আরও জানুন
-              </Button>
+              <Link href={`/courses`}>
+                <Button size="lg" className="">
+                  কোর্স দেখুন
+                </Button>
+              </Link>
+              <Link href={`/about`}>
+                <Button variant="outline" size="lg" className="">
+                  আরও জানুন
+                </Button>
+              </Link>
             </div>
 
             {/* Features Grid */}
