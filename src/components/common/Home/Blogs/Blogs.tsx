@@ -11,7 +11,7 @@ const Blogs = () => {
   const { data: blogsData, isLoading: isBlogLoading } = useGetBlogsQuery({});
 
   return (
-    <Container className="py-16 lg:py-24">
+    <Container className="py-16 lg:py-20">
       <SectionTitle text="ইসলামিক ব্লগ" />
 
       {isBlogLoading ? (

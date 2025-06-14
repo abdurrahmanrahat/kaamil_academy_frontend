@@ -24,7 +24,7 @@ const ManageBlogs = () => {
   }
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="py-6 min-h-screen">
       <div>
         {blogs?.data.data.length > 0 ? (
           <Table className="border border-primary">
