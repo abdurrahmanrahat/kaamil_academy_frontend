@@ -31,7 +31,7 @@ import { useState } from "react";
 const ManageQuranLSStudent = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [studentStatus, setStudentStatus] = useState<string>("");
-  const [studentsBatchNo, setStudentsBatchNo] = useState<string>("");
+  const [studentsBatchNo, setStudentsBatchNo] = useState<string>("batch-01");
   const [studentGender, setStudentGender] = useState<string>("");
 
   const debouncedSearchTerm = useDebounced(searchTerm, 800);
@@ -111,6 +111,7 @@ const ManageQuranLSStudent = () => {
         <div className="flex gap-4 justify-center md:justify-end">
           {/* batch no filtering */}
           <Select
+            value={studentsBatchNo}
             onValueChange={(currBatch) => handleSelectUserBatchNo(currBatch)}
           >
             <SelectTrigger className="md:w-[124px] lg:w-[170px] cursor-pointer">

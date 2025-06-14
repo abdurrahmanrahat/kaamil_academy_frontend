@@ -32,21 +32,37 @@ export default function Footer() {
               সুযোগ করে দেয়।
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link
+                href="https://www.facebook.com/share/19q5AmmnrK"
+                target="_blank"
+                className="text-gray-300 hover:text-white"
+              >
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link
+                href="https://www.youtube.com/@KaamilAcademyofficial"
+                target="_blank"
+                className="text-gray-300 hover:text-white"
+              >
+                <Youtube className="h-5 w-5" />
+                <span className="sr-only">YouTube</span>
+              </Link>
+              <Link
+                href="#"
+                target="_blank"
+                className="text-gray-300 hover:text-white"
+              >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link
+                href="#"
+                target="_blank"
+                className="text-gray-300 hover:text-white"
+              >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
-                <Youtube className="h-5 w-5" />
-                <span className="sr-only">YouTube</span>
               </Link>
             </div>
           </div>
@@ -148,7 +164,9 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-primary" />
-                <span className="text-gray-300">info@kaamilacademy.com</span>
+                <span className="text-gray-300">
+                  kaamilacademyofficial@gmail.com
+                </span>
               </li>
             </ul>
           </div>

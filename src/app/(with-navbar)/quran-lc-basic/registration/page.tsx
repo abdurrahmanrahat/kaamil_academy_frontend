@@ -5,9 +5,11 @@ import KAForm from "@/components/shared/Forms/KAForm";
 import KAInput from "@/components/shared/Forms/KAInput";
 import KASelect from "@/components/shared/Forms/KASelect";
 import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
+import SectionTitle from "@/components/shared/Ui/SectionTitle";
 import { Button } from "@/components/ui/button";
 import { useAddQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -41,6 +43,8 @@ const quranLCBasicRegistrationDefaultValues = {
 };
 
 const QuranLCBasicRegistration = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   // redux api
@@ -50,12 +54,16 @@ const QuranLCBasicRegistration = () => {
   ] = useAddQuranLCBasicStudentMutation();
 
   const handleQuranLCBasicRegistration = async (values: FieldValues) => {
+    setIsLoading(true);
+
     try {
       const newStudent = { ...values, batch: "batch-01" };
       const res = await addQuranLCBasicStudentRegistration(newStudent).unwrap();
 
       if (res.success) {
         toast.success(res.message);
+
+        setIsLoading(false);
 
         // navigate user
         router.push(
@@ -66,15 +74,16 @@ const QuranLCBasicRegistration = () => {
       toast.error(
         error?.data?.errorSources[0].message || "Something went wrong!"
       );
+
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen">
-      <h2 className="mt-10 text-xl md:text-2xl font-semibold text-center">
-        কুরআন শিক্ষা কোর্স
-      </h2>
-      <div className="max-w-[980px] mx-auto my-12 px-4">
+    <div className="py-12 lg:py-16">
+      <SectionTitle text="কুরআন শিক্ষা কোর্স" />
+
+      <div className="max-w-[980px] mx-auto my-8 px-4">
         <KAForm
           onSubmit={handleQuranLCBasicRegistration}
           defaultValues={quranLCBasicRegistrationDefaultValues}
@@ -239,9 +248,9 @@ const QuranLCBasicRegistration = () => {
             <Button
               className="h-11 cursor-pointer"
               type="submit"
-              disabled={isQuranLCBasicStudentRegistrationLoading}
+              disabled={isQuranLCBasicStudentRegistrationLoading || isLoading}
             >
-              {isQuranLCBasicStudentRegistrationLoading ? (
+              {isQuranLCBasicStudentRegistrationLoading || isLoading ? (
                 <span className="space-x-2 flex items-center">
                   <LoaderSpinner /> <span>Processing...</span>
                 </span>
