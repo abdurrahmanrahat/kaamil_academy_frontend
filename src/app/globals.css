@@ -74,3 +74,33 @@
   scrollbar-width: thin;
   scrollbar-color: #007F00 #f1f1f1;
 }
+
+/* html content for description */
+.html-content h1 {
+  @apply text-3xl font-semibold;
+}
+
+.html-content h2 {
+  @apply text-2xl font-semibold;
+}
+
+.html-content h3 {
+  @apply text-xl font-semibold;
+}
+
+.html-content h4 {
+  @apply text-lg font-medium;
+}
+
+.html-content h5 {
+  @apply text-base font-medium;
+}
+
+.html-content h6 {
+  @apply text-sm font-medium;
+}
+
+p:empty {
+  min-height: 1rem;
+  display: block;
+}

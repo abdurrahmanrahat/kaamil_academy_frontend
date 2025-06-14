@@ -242,7 +242,7 @@ const QuranLCBasicRegistration = () => {
               disabled={isQuranLCBasicStudentRegistrationLoading}
             >
               {isQuranLCBasicStudentRegistrationLoading ? (
-                <span className="flex gap-2">
+                <span className="space-x-2 flex items-center">
                   <LoaderSpinner /> <span>Processing...</span>
                 </span>
               ) : (

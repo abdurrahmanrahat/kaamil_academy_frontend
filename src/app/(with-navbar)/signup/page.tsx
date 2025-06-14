@@ -135,7 +135,7 @@ export default function SignUp() {
               <div className="mt-2 w-full">
                 <Button className="h-11 cursor-pointer w-full" type="submit">
                   {isLoading ? (
-                    <span className="flex gap-2">
+                    <span className="space-x-2 flex items-center">
                       <LoaderSpinner /> <span>Signing...</span>
                     </span>
                   ) : (
