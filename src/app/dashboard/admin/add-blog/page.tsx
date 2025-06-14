@@ -12,13 +12,12 @@ import { useAddBlogMutation } from "@/redux/api/blogApi";
 import { useGetCurrentUserByEmailQuery } from "@/redux/api/userApi";
 import { useAppSelector } from "@/redux/hooks";
 import { useCurrentUser } from "@/redux/reducers/authSlice";
+import { blogInitialTags } from "@/utils/tags";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
-
-const blogInitialTags = ["quran", "hadith", "islamic", "religion", "akida"];
 
 const blogSchema = z.object({
   blogTitle: z.string().min(1, "Title required"),
