@@ -112,8 +112,8 @@ const QuranLCBasicRegistration = () => {
               <KASelect
                 name="userGender"
                 options={[
-                  { value: "male", label: "মেইল" },
-                  { value: "female", label: "ফিমেইল" },
+                  { value: "male", label: "মেইল (ছেলে)" },
+                  { value: "female", label: "ফিমেইল (মেয়ে)" },
                 ]}
                 placeholder=""
                 className=""

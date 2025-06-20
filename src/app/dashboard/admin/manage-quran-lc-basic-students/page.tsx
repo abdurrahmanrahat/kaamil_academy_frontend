@@ -185,9 +185,9 @@ const ManageQuranLSStudent = () => {
                 <TableHead className="text-base text-white font-medium py-3">
                   Phone Number
                 </TableHead>
-                {/* <TableHead className="text-base text-white font-medium py-3">
-                  WhatsApp
-                </TableHead> */}
+                <TableHead className="text-base text-white font-medium py-3">
+                  Gander
+                </TableHead>
                 <TableHead className="text-base text-white font-medium py-3">
                   Batch
                 </TableHead>
@@ -225,7 +225,7 @@ const ManageQuranLSStudent = () => {
                     <TableCell>{user.paymentMethod}</TableCell>
                     <TableCell>{user.RegFeeNumber}</TableCell>
                     <TableCell>{user.phoneNumber}</TableCell>
-                    {/* <TableCell>{user.whatsAppNumber}</TableCell> */}
+                    <TableCell>{user.userGender}</TableCell>
                     <TableCell>{user.batch}</TableCell>
                     <TableCell className="capitalize">{user.status}</TableCell>
                     <TableCell>
