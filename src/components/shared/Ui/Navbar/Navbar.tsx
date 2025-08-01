@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, useCurrentUser } from "@/redux/reducers/authSlice";
 import { removeUser } from "@/services/auth.services";
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Sun, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -143,54 +144,60 @@ const Navbar = () => {
         </div>
 
         {/* mobile menu dropdown */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden absolute left-0 bg-white w-full z-[999] ${
-            isOpen ? "opacity-100 h-auto" : "opacity-0 h-0"
-          } border-b border-gray-200`}
-        >
-          <div className="w-[90%] mx-auto py-4">
-            <div className="flex flex-col space-y-4">
-              <>
-                {navItems.map((item, index) => (
-                  <ActiveLink
-                    href={item.href}
-                    key={index}
-                    exact={item.href === "/"}
-                  >
-                    <span
-                      className="font-medium transition-colors duration-300 hover:text-primary"
-                      // onClick={() => setIsOpen(!isOpen)}
-                    >
-                      {item.label}
-                    </span>
-                  </ActiveLink>
-                ))}
-              </>
-
-              <>
-                {user && (
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden absolute top-[70px] left-0 w-full z-[999] bg-white border-b border-gray-400"
+            >
+              <div className="w-[90%] mx-auto py-4">
+                <div className="flex flex-col space-y-4">
                   <>
-                    {isAdmin && (
-                      <ActiveLink href={`/dashboard/admin`}>
-                        <span className="font-medium transition-colors duration-300 hover:text-primary">
-                          Dashboard
+                    {navItems.map((item, index) => (
+                      <ActiveLink
+                        href={item.href}
+                        key={index}
+                        exact={item.href === "/"}
+                      >
+                        <span
+                          className="font-medium transition-colors duration-300 hover:text-primary"
+                          // onClick={() => setIsOpen(!isOpen)}
+                        >
+                          {item.label}
                         </span>
                       </ActiveLink>
-                    )}
+                    ))}
+                  </>
 
-                    {isStudent && (
-                      <ActiveLink href={`/dashboard/user`}>
-                        <span className="font-medium transition-colors duration-300 hover:text-primary">
-                          Dashboard
-                        </span>
-                      </ActiveLink>
+                  <>
+                    {user && (
+                      <>
+                        {isAdmin && (
+                          <ActiveLink href={`/dashboard/admin`}>
+                            <span className="font-medium transition-colors duration-300 hover:text-primary">
+                              Dashboard
+                            </span>
+                          </ActiveLink>
+                        )}
+
+                        {isStudent && (
+                          <ActiveLink href={`/dashboard/user`}>
+                            <span className="font-medium transition-colors duration-300 hover:text-primary">
+                              Dashboard
+                            </span>
+                          </ActiveLink>
+                        )}
+                      </>
                     )}
                   </>
-                )}
-              </>
-            </div>
-          </div>
-        </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Container>
     </nav>
   );
