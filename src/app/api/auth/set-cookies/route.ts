@@ -1,4 +1,4 @@
-import { authKey } from "@/constants/authKey";
+import { accessAuthKey } from "@/constants/authKey";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   );
 
   // ✅ Set cookie via response
-  response.cookies.set(authKey, accessToken, {
+  response.cookies.set(accessAuthKey, accessToken, {
     httpOnly: true,
     secure: true,
     sameSite: "none",

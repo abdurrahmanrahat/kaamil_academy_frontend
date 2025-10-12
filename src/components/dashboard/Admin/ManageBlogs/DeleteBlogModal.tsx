@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useDeleteBlogMutation } from "@/redux/api/blogApi";
 import { Trash2 } from "lucide-react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const DeleteBlogModal = ({ blogId }: { blogId: string }) => {
   // redux api

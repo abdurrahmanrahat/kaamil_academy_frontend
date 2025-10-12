@@ -1,3 +1,5 @@
+"use client";
+
 import { IMAGES } from "@/image-data";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/reducers/authSlice";
@@ -7,7 +9,7 @@ import { CodeResponse, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const BACKED_URL = process.env.NEXT_PUBLIC_BACKED_URL;
 
@@ -23,17 +25,12 @@ const GoogleLogin = () => {
           `${BACKED_URL}/auth/google?code=${authResult.code}`
         );
 
-        const accessToken = res.data.data.accessToken;
+        const { accessToken } = res.data.data;
 
         if (accessToken) {
           const user = decodedToken(accessToken);
           dispatch(setUser({ user, token: accessToken }));
           storeUserInfo({ accessToken }); // local storage
-
-          // 🎯 Set HttpOnly cookie from client via API
-          await axios.post("/api/auth/set-cookies", {
-            accessToken: accessToken,
-          });
 
           toast.success(res.data.message);
 

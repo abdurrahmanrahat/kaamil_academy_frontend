@@ -1,18 +1,18 @@
 "use client";
 
+import { removeTokensFromCookies } from "@/app/actions/token";
 import { Button } from "@/components/ui/button";
-import { authKey } from "@/constants/authKey";
+import { useLogoutUser } from "@/hooks/useLogoutUser";
 import { IMAGES } from "@/image-data";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout, useCurrentUser } from "@/redux/reducers/authSlice";
-import { removeUser } from "@/services/auth.services";
-import axios from "axios";
+import { useAppSelector } from "@/redux/hooks";
+import { useCurrentUser } from "@/redux/reducers/authSlice";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import ActiveLink from "../ActiveLink";
 import Container from "../Container";
 import { navItems } from "./navbar.utils";
@@ -23,23 +23,20 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const user = useAppSelector(useCurrentUser);
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const logoutUser = useLogoutUser();
 
   const isAdmin = user?.role === "admin";
   const isStudent = user?.role === "user";
 
   // logout user
   const handleLogout = async () => {
-    // 🎯 remove HttpOnly cookie from client via API
-    await axios.post("/api/auth/remove-cookies", {
-      accessToken: authKey,
-      // refreshToken: "testToken", // send more name for removing
-    });
-    dispatch(logout());
-    removeUser();
+    await removeTokensFromCookies();
+    logoutUser();
 
     router.push("/");
+
+    toast.success("Logout successfully!");
   };
 
   // close menu when clicking outside
@@ -128,7 +125,7 @@ const Navbar = () => {
 
           {/* login/logout button */}
           <div className="flex items-center gap-4">
-            <Sun />
+            {/* <ThemeToggle /> */}
             <>
               {user ? (
                 <Button className="cursor-pointer" onClick={handleLogout}>

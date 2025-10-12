@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUpdateQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { Ellipsis } from "lucide-react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const StatusChangeDropdown = ({
   studentId,

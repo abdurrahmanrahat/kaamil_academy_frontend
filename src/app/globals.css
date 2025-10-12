@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* off the dark/light mode */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
 @theme {
   /* make it 100 - 900 variants for primary color */
   --color-primary: #007F00;
@@ -9,9 +12,61 @@
   /* --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 120rem; */
 
+  --gradient-primary: linear-gradient(135deg, hsl(120 80% 30%), hsl(120 100% 25%));
+  --gradient-soft: linear-gradient(180deg, hsl(120 40% 97%), hsl(0 0% 100%));
+  --gradient-hero: linear-gradient(135deg, hsl(120 60% 40%), hsl(120 80% 30%));
+
   --shadow-cardLightShadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
   --shadow-topUpShadow: 0 5px 20px rgba(0, 0, 0, .2)
 }
+
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+@utility bg-gradient-soft {
+  background-image: var(--gradient-soft);
+}
+
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+
+
+@utility animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+@utility animate-scale-in {
+  animation: scale-in 0.3s ease-out;
+}
+
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 /* body {
   background-color: black;

@@ -1,80 +1,9 @@
-"use client";
-
-import KAForm from "@/components/shared/Forms/KAForm";
-import KAInput from "@/components/shared/Forms/KAInput";
 import Container from "@/components/shared/Ui/Container";
-import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
-import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/reducers/authSlice";
-import { loginUser } from "@/services/actions/loginUser";
-import { registerUser } from "@/services/actions/registerUser";
-import { storeUserInfo } from "@/services/auth.services";
-import { decodedToken } from "@/utils/jwt";
-import axios from "axios";
 import { Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FieldValues } from "react-hook-form";
-import { toast } from "react-toastify";
-import { z } from "zod";
-
-const userSignUpSchema = z.object({
-  name: z.string().min(1, "Enter name"),
-  email: z.string().email("Enter email"),
-  password: z.string().min(1, "Enter password"),
-});
+import SignupForm from "./_components/SignupForm";
 
 export default function SignUp() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const dispatch = useAppDispatch();
-
-  const router = useRouter();
-
-  const handleSignUp = async (values: FieldValues) => {
-    setIsLoading(true);
-    try {
-      const res = await registerUser(values);
-
-      if (res.success) {
-        // auto login after user register
-        const userRes = await loginUser({
-          email: values.email,
-          password: values.password,
-        });
-
-        if (userRes.success) {
-          const user = decodedToken(userRes.data.accessToken);
-
-          dispatch(setUser({ user, token: userRes.data.accessToken }));
-          storeUserInfo({ accessToken: userRes.data.accessToken });
-          // 🎯 Set HttpOnly cookie from client via API
-          await axios.post("/api/auth/set-cookies", {
-            accessToken: userRes.data.accessToken,
-          });
-
-          toast.success(res.message);
-
-          setIsLoading(false);
-          router.push("/");
-        }
-      } else {
-        toast.error(res.message || "Something went wrong!");
-
-        setIsLoading(false);
-      }
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        error?.data?.errorSources[0].message || "Something went wrong!"
-      );
-
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full flex justify-center items-center">
       <Container className="max-w-md">
@@ -93,58 +22,9 @@ export default function SignUp() {
             </p>
           </div>
 
-          <KAForm
-            onSubmit={handleSignUp}
-            schema={userSignUpSchema}
-            defaultValues={{
-              name: "",
-              email: "",
-              password: "",
-            }}
-          >
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-4">
-                <div className="grid gap-1">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
+          {/* form here */}
+          <SignupForm />
 
-                  <KAInput name="name" />
-                </div>
-
-                <div className="grid gap-1">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-
-                  <KAInput
-                    name="email"
-                    type="email"
-                    placeholder="example@gmail.com"
-                  />
-                </div>
-
-                <div className="grid gap-1">
-                  <label htmlFor="password" className="text-sm font-medium">
-                    Password
-                  </label>
-                  <KAInput name="password" type="password" />
-                </div>
-              </div>
-
-              <div className="mt-2 w-full">
-                <Button className="h-11 cursor-pointer w-full" type="submit">
-                  {isLoading ? (
-                    <span className="space-x-2 flex items-center">
-                      <LoaderSpinner /> <span>Signing...</span>
-                    </span>
-                  ) : (
-                    "Sign Up"
-                  )}
-                </Button>
-              </div>
-            </div>
-          </KAForm>
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link href="/login" className="text-primary hover:text-primary/90">

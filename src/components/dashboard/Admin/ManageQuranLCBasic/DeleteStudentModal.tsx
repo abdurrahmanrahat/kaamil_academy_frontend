@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useDeleteQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { Trash2 } from "lucide-react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const DeleteStudentModal = ({ studentId }: { studentId: string }) => {
   // redux api

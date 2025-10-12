@@ -1,12 +1,12 @@
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { authKey } from "./constants/authKey";
+import { accessAuthKey } from "./constants/authKey";
 import { decodedToken } from "./utils/jwt";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const accessToken = (await cookies()).get(authKey)?.value;
+  const accessToken = (await cookies()).get(accessAuthKey)?.value;
 
   // 🔒 Redirect to /login if not logged in and accessing protected routes
   if (!accessToken) {

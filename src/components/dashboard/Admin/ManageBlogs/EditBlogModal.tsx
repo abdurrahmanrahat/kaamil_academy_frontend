@@ -20,7 +20,7 @@ import { useUpdateBlogMutation } from "@/redux/api/blogApi";
 import { TBlog } from "@/types";
 import { FieldValues } from "react-hook-form";
 import { FaRegEdit } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const blogInitialTags = ["quran", "hadith", "islamic", "religion"];
 

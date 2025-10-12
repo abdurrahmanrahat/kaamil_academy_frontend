@@ -1,7 +1,7 @@
+import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/lib/providers/Providers";
 import type { Metadata } from "next";
 import { Tiro_Bangla } from "next/font/google";
-import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
 // const roboto = Roboto({
@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
-          <ToastContainer />
+          <Toaster richColors position="top-right" />
         </Providers>
       </body>
     </html>

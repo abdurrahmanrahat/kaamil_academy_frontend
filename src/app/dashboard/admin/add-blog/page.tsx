@@ -16,7 +16,7 @@ import { blogInitialTags } from "@/utils/tags";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const blogSchema = z.object({
