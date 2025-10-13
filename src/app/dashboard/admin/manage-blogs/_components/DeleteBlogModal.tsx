@@ -1,3 +1,6 @@
+"use client";
+
+import { deleteBlogFromDB } from "@/app/actions/blog";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,17 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useDeleteBlogMutation } from "@/redux/api/blogApi";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 const DeleteBlogModal = ({ blogId }: { blogId: string }) => {
-  // redux api
-  const [deleteBlog] = useDeleteBlogMutation();
-
   const handleDeleteBlog = async () => {
     try {
-      const res = await deleteBlog(blogId).unwrap();
+      const res = await deleteBlogFromDB(blogId);
 
       if (res.success) {
         toast.success(res.message);

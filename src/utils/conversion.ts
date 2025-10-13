@@ -23,9 +23,20 @@ export const formatDate = (dateString: string) => {
 };
 
 // Function to format text from HTML to plain text
-export const stripHtml = (html: string) => {
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  return doc.body.textContent || "";
+export const stripHtml = (html: string): string => {
+  if (!html) return "";
+
+  // Remove all tags safely
+  const text = html.replace(/<[^>]*>/g, "");
+
+  // Decode common HTML entities (optional)
+  return text
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
 };
 
 // Function to truncate text to a specified length

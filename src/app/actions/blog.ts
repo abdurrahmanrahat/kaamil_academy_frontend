@@ -1,0 +1,182 @@
+"use server";
+
+import { tagLists } from "@/constants/tag";
+import { revalidateTag } from "next/cache";
+import { fetchWithAuth } from "./fetchWithAuth";
+
+// 🔹 Common response type for safety
+interface ServerResponse<T = any> {
+  success: boolean;
+  data: T;
+  message: string;
+}
+
+/* ============================================
+   Get All Blogs
+============================================ */
+export const getAllBlogsFromDB = async (
+  params?: Record<string, any>
+): Promise<ServerResponse> => {
+  try {
+    const queryParams = params
+      ? "?" + new URLSearchParams(params).toString()
+      : "";
+
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs${queryParams}`,
+      {
+        cache: "force-cache",
+        next: { tags: [tagLists.BLOG] },
+      }
+    );
+
+    if (!res.ok) {
+      return { success: false, data: [], message: "Failed to fetch blogs" };
+    }
+
+    const data = await res.json();
+    return {
+      success: data?.success ?? true,
+      data: data?.data || [],
+      message: data?.message || "Blogs fetched successfully",
+    };
+  } catch (error: any) {
+    console.error("Error fetching blogs:", error);
+    return { success: false, data: [], message: "Network or server error" };
+  }
+};
+
+/* ============================================
+   Get Single Blog
+============================================ */
+export const getSingleBlogFromDB = async (
+  blogId: string
+): Promise<ServerResponse> => {
+  try {
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
+      {
+        cache: "force-cache",
+        next: { tags: [tagLists.BLOG] },
+      }
+    );
+
+    if (!res.ok) {
+      return { success: false, data: null, message: "Failed to fetch blog" };
+    }
+
+    const data = await res.json();
+    return {
+      success: data?.success ?? true,
+      data: data?.data || null,
+      message: data?.message || "Blog fetched successfully",
+    };
+  } catch (error: any) {
+    console.error("Error fetching single blog:", error);
+    return { success: false, data: null, message: "Network or server error" };
+  }
+};
+
+/* ============================================
+  Add Blog
+============================================ */
+export const addBlogToDB = async (
+  blogData: Record<string, any>
+): Promise<ServerResponse> => {
+  try {
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/create-blog`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(blogData),
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      return { success: false, data: null, message: "Failed to create blog" };
+    }
+
+    const data = await res.json();
+    revalidateTag(tagLists.BLOG);
+
+    return {
+      success: data?.success ?? true,
+      data: data?.data || null,
+      message: data?.message || "Blog created successfully",
+    };
+  } catch (error: any) {
+    console.error("Error adding blog:", error);
+    return { success: false, data: null, message: "Network or server error" };
+  }
+};
+
+/* ============================================
+  Update Blog
+============================================ */
+export const updateBlogInDB = async (
+  blogId: string,
+  updatedData: Record<string, any>
+): Promise<ServerResponse> => {
+  try {
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      return { success: false, data: null, message: "Failed to update blog" };
+    }
+
+    const data = await res.json();
+    revalidateTag(tagLists.BLOG);
+
+    return {
+      success: data?.success ?? true,
+      data: data?.data || null,
+      message: data?.message || "Blog updated successfully",
+    };
+  } catch (error: any) {
+    console.error("Error updating blog:", error);
+    return { success: false, data: null, message: "Network or server error" };
+  }
+};
+
+/* ============================================
+  Delete Blog
+============================================ */
+export const deleteBlogFromDB = async (
+  blogId: string
+): Promise<ServerResponse> => {
+  try {
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
+      {
+        method: "DELETE",
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      return { success: false, data: null, message: "Failed to delete blog" };
+    }
+
+    const data = await res.json();
+    revalidateTag(tagLists.BLOG);
+
+    return {
+      success: data?.success ?? true,
+      data: data?.data || null,
+      message: data?.message || "Blog deleted successfully",
+    };
+  } catch (error: any) {
+    console.error("Error deleting blog:", error);
+    return { success: false, data: null, message: "Network or server error" };
+  }
+};

@@ -1,5 +1,5 @@
-import AboutSection from "@/components/common/About/AboutSection";
-import Features from "@/components/common/About/Features";
+import AboutSection from "./_components/AboutSection";
+import Features from "./_components/Features";
 
 const AboutPage = () => {
   return (

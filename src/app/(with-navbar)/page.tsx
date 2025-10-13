@@ -1,6 +1,6 @@
-import Banner2 from "@/components/common/Home/Banner/Banner2";
-import Blogs from "@/components/common/Home/Blogs/Blogs";
-import Courses from "@/components/common/Home/Courses/Courses";
+import Banner2 from "@/app/(with-navbar)/_components/Banner/Banner2";
+import Courses from "@/app/(with-navbar)/_components/Courses/Courses";
+import Blogs from "./_components/Blogs/Blogs";
 import Testimonials from "./_components/Testimonials/Testimonials";
 
 export default function Home() {

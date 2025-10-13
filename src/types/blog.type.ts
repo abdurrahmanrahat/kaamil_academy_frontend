@@ -2,10 +2,10 @@ import { TUser } from "./user.type";
 
 export type TBlog = {
   _id: string;
-  blogTitle: string;
-  blogImage: string;
-  blogDescription: string;
-  blogTags: string[];
+  title: string;
+  image: string;
+  description: string;
+  tags: string[];
   authorDetails: TUser;
   isDeleted: boolean;
   createdAt: string;

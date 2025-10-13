@@ -1,6 +1,6 @@
 import Container from "@/components/shared/Ui/Container";
 import SectionTitle from "@/components/shared/Ui/SectionTitle";
-import CourseCard from "../../Course/CourseCard";
+import CourseCard from "../../courses/_components/CourseCard";
 
 const Courses = () => {
   return (

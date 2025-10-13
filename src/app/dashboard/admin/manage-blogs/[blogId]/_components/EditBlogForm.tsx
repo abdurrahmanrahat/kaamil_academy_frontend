@@ -1,39 +1,27 @@
 "use client";
 
+import { updateBlogInDB } from "@/app/actions/blog";
 import KAForm from "@/components/shared/Forms/KAForm";
 import KAImageUploader from "@/components/shared/Forms/KAImageUploader";
 import KAInput from "@/components/shared/Forms/KAInput";
 import KAMultiSelectWithExtra from "@/components/shared/Forms/KAMultiSelectWithExtra";
 import KATextEditor from "@/components/shared/Forms/KATextEditor";
 import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
-import { MyLoader } from "@/components/shared/Ui/MyLoader";
 import { Button } from "@/components/ui/button";
-import {
-  useGetSingleBlogQuery,
-  useUpdateBlogMutation,
-} from "@/redux/api/blogApi";
+import { TBlog } from "@/types";
+import { blogInitialTags } from "@/utils/tags";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-const blogInitialTags = ["quran", "hadith", "islamic", "religion"];
-
 const img_hosting_token = process.env.NEXT_PUBLIC_imgBB_token;
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
-const EditBlogPage = ({ blogId }: { blogId: string }) => {
+const EditBlogForm = ({ blog }: { blog: TBlog }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-
-  const { data: singleBlog, isLoading: isSingleBlogLoading } =
-    useGetSingleBlogQuery(blogId);
-  const [updateBlog] = useUpdateBlogMutation();
-
-  if (isSingleBlogLoading) {
-    return <MyLoader />;
-  }
 
   const handleImageUpload = async (file: File): Promise<string | null> => {
     const formData = new FormData();
@@ -63,23 +51,17 @@ const EditBlogPage = ({ blogId }: { blogId: string }) => {
 
     const updatedData: { [key: string]: any } = {};
 
-    if (values.blogImage instanceof File) {
-      const uploadedURL = await handleImageUpload(values.blogImage);
-      if (uploadedURL) updatedData.blogImage = uploadedURL;
+    if (values.image instanceof File) {
+      const uploadedURL = await handleImageUpload(values.image);
+      if (uploadedURL) updatedData.image = uploadedURL;
     }
 
-    if (values.blogTitle) updatedData.blogTitle = values.blogTitle;
-    if (values.blogDescription)
-      updatedData.blogDescription = values.blogDescription;
-    if (values.blogTags) updatedData.blogTags = values.blogTags;
-
-    const payload = {
-      blogId,
-      updatedData,
-    };
+    if (values.title) updatedData.title = values.title;
+    if (values.description) updatedData.description = values.description;
+    if (values.tags) updatedData.tags = values.tags;
 
     try {
-      const res = await updateBlog(payload).unwrap();
+      const res = await updateBlogInDB(blog._id, updatedData);
 
       setIsLoading(false);
 
@@ -97,28 +79,28 @@ const EditBlogPage = ({ blogId }: { blogId: string }) => {
   };
 
   const defaultValues = {
-    blogTitle: singleBlog.data.blogTitle || "",
-    blogImage: singleBlog.data.blogImage || "",
-    blogDescription: singleBlog.data.blogDescription || "",
-    blogTags: singleBlog.data.blogTags || [],
+    title: blog.title || "",
+    image: blog.image || "",
+    description: blog.description || "",
+    tags: blog.tags || [],
   };
   return (
     <div>
       <KAForm onSubmit={handleUpdateBlog} defaultValues={defaultValues}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           <div>
-            <label htmlFor="blogTitle" className="block font-medium mb-[2px]">
+            <label htmlFor="title" className="block font-medium mb-[2px]">
               ব্লগ শিরোনাম
             </label>
-            <KAInput name="blogTitle" />
+            <KAInput name="title" />
           </div>
 
           <div>
-            <label htmlFor="blogImage" className="block font-medium mb-[2px]">
+            <label htmlFor="image" className="block font-medium mb-[2px]">
               ব্লগ কভার ইমেজ
             </label>
             <KAImageUploader
-              name="blogImage"
+              name="image"
               className="w-full block py-[7px] px-3  text-[15px] focus:outline-none text-black border border-primary-100"
             />
           </div>
@@ -126,24 +108,24 @@ const EditBlogPage = ({ blogId }: { blogId: string }) => {
 
         <div className="mt-6">
           <label
-            htmlFor="blogDescription"
+            htmlFor="description"
             className="block text-start font-medium mb-[2px]"
           >
             ব্লগ বিস্তারিত বর্ণনা
           </label>
 
           <KATextEditor
-            name="blogDescription"
+            name="description"
             className="w-full block py-[7px] px-3 rounded text-[15px] focus:outline-none text-black border border-primary-100"
           />
         </div>
 
         <div className="mt-6">
-          <label htmlFor="blogTags" className="block font-medium mb-[2px]">
+          <label htmlFor="tags" className="block font-medium mb-[2px]">
             ব্লগ ট্যাগস
           </label>
           <KAMultiSelectWithExtra
-            name="blogTags"
+            name="tags"
             className="border border-primary-100 rounded"
             initialTags={blogInitialTags}
           />
@@ -166,4 +148,4 @@ const EditBlogPage = ({ blogId }: { blogId: string }) => {
   );
 };
 
-export default EditBlogPage;
+export default EditBlogForm;

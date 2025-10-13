@@ -9,18 +9,18 @@ export function BlogCard({ blog }: { blog: TBlog }) {
     <div className="shadow-cardLightShadow rounded-md">
       <div className="aspect-video relative">
         <Image
-          src={blog.blogImage || "/placeholder.svg?height=200&width=400"}
-          alt={blog.blogTitle}
+          src={blog.image}
+          alt={blog.title}
           fill
           className="object-cover rounded-t-md"
         />
       </div>
       <CardContent className="p-4">
         <h3 className="text-xl font-semibold mb-2 line-clamp-2">
-          {blog.blogTitle}
+          {blog.title}
         </h3>
         <p className="text-muted-foreground text-sm">
-          {truncateText(stripHtml(blog.blogDescription), 140)}
+          {truncateText(stripHtml(blog.description), 140)}
         </p>
       </CardContent>
       <div className="px-4 pt-0 pb-4">

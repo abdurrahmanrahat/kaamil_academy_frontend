@@ -1,7 +1,5 @@
-"use client";
+import { getAllBlogsFromDB } from "@/app/actions/blog";
 
-import DeleteBlogModal from "@/components/dashboard/Admin/ManageBlogs/DeleteBlogModal";
-import { MyLoader } from "@/components/shared/Ui/MyLoader";
 import {
   Table,
   TableBody,
@@ -10,62 +8,70 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetBlogsQuery } from "@/redux/api/blogApi";
 import { TBlog } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
+import DeleteBlogModal from "./_components/DeleteBlogModal";
 
-const ManageBlogs = () => {
-  const { data: blogs, isLoading: isBlogLoading } = useGetBlogsQuery({});
+const ManageBlogs = async () => {
+  const blogsResponse = await getAllBlogsFromDB();
 
-  if (isBlogLoading) {
-    return <MyLoader text="Loading..." />;
+  if (!blogsResponse?.success) {
+    return (
+      <div className="text-center py-12">
+        <h3 className="text-2xl font-medium text-gray-800">
+          কোন ব্লগ পাওয়া যায়নি
+        </h3>
+      </div>
+    );
   }
 
   return (
     <div className="py-6 min-h-screen">
       <div>
-        {blogs?.data.data.length > 0 ? (
-          <Table className="border border-primary">
+        {blogsResponse?.data?.data?.length > 0 ? (
+          <Table className="">
             <TableHeader className="">
               <TableRow className="bg-primary text-white">
-                <TableHead className="text-base font-medium py-2">#</TableHead>
-                <TableHead className="text-base font-medium py-2 min-w-[120px]">
+                <TableHead className="text-base font-medium py-3 min-w-[20px] text-center">
+                  #
+                </TableHead>
+                <TableHead className="text-base font-medium py-3 min-w-[120px]">
                   Blog Image
                 </TableHead>
-                <TableHead className="text-base font-medium py-2 min-w-[200px]">
+                <TableHead className="text-base font-medium py-3 min-w-[200px]">
                   Blog Title
                 </TableHead>
 
-                <TableHead className="text-base font-medium py-2 min-w-[140px]">
+                <TableHead className="text-base font-medium py-3 min-w-[140px]">
                   Author Name
                 </TableHead>
 
-                <TableHead className="text-base font-medium py-2">
+                <TableHead className="text-base font-medium py-3">
                   Edit
                 </TableHead>
-                <TableHead className="text-base font-medium py-2">
+                <TableHead className="text-base font-medium py-3">
                   Delete
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {blogs?.data.data.map((blog: TBlog, index: number) => (
+              {blogsResponse?.data?.data?.map((blog: TBlog, index: number) => (
                 <TableRow key={blog._id} className="">
-                  <TableCell className="font-semibold">{index + 1}</TableCell>
+                  <TableCell className="font-semibold text-center">
+                    {index + 1}
+                  </TableCell>
                   <TableCell>
                     <Image
-                      src={blog.blogImage}
-                      alt={blog.blogTitle.slice(0, 4)}
+                      src={blog.image}
+                      alt={blog.title.slice(0, 4)}
                       width={80}
                       height={80}
                       className="rounded-full"
                     />
                   </TableCell>
-                  <TableCell className="font-medium">
-                    {blog.blogTitle}
-                  </TableCell>
+                  <TableCell className="font-medium">{blog.title}</TableCell>
 
                   <TableCell>{blog.authorDetails.name}</TableCell>
 
@@ -84,7 +90,11 @@ const ManageBlogs = () => {
           </Table>
         ) : (
           <div className="flex justify-center items-center h-screen w-full">
-            <h2 className="text-2xl font-semibold">No Blog Found!</h2>
+            <div className="text-center py-12">
+              <h3 className="text-2xl font-medium text-gray-800">
+                কোন ব্লগ পাওয়া যায়নি
+              </h3>
+            </div>
           </div>
         )}
       </div>

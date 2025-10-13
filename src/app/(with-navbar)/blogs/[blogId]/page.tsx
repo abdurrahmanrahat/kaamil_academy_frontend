@@ -1,26 +1,20 @@
-"use client";
-
-import { RelatedBlogs } from "@/components/common/Blog/RelatedBlogs";
+import { getSingleBlogFromDB } from "@/app/actions/blog";
 import Container from "@/components/shared/Ui/Container";
-import { MyLoader } from "@/components/shared/Ui/MyLoader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useGetSingleBlogQuery } from "@/redux/api/blogApi";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import RelatedBlogs from "./_components/RelatedBlogs";
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const blogId = params.blogId as string;
+export default async function BlogDetailPage(props: {
+  params: Promise<{ blogId: string }>;
+}) {
+  const params = await props.params;
 
-  const { data: singleBlog, isLoading: isSingleBlogLoading } =
-    useGetSingleBlogQuery(blogId);
+  const blogId = params?.blogId;
 
-  if (isSingleBlogLoading) {
-    return <MyLoader text="Loading..." />;
-  }
+  const singleBlogResponse = await getSingleBlogFromDB(blogId);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -32,7 +26,7 @@ export default function BlogDetailPage() {
     }).format(date);
   };
 
-  if (!singleBlog) {
+  if (!singleBlogResponse.success) {
     return (
       <Container className="min-h-[80vh] w-full flex flex-col items-center justify-center">
         <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-2">
@@ -64,21 +58,21 @@ export default function BlogDetailPage() {
           </Link>
 
           <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-            {singleBlog.data.blogTitle}
+            {singleBlogResponse.data.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
-              <span>{formatDate(singleBlog.data.createdAt)}</span>
+              <span>{formatDate(singleBlogResponse.data.createdAt)}</span>
             </div>
             <div className="flex items-center gap-1">
               <User className="h-4 w-4" />
-              <span>{singleBlog.data.authorDetails.name}</span>
+              <span>{singleBlogResponse.data.authorDetails.name}</span>
             </div>
             <div className="flex items-center gap-2">
               <Tag className="h-4 w-4" />
-              {singleBlog.data.blogTags.map((tag: string) => (
+              {singleBlogResponse.data.tags.map((tag: string) => (
                 <Badge
                   key={tag}
                   variant="outline"
@@ -96,8 +90,8 @@ export default function BlogDetailPage() {
         <div className="col-span-12 md:col-span-8 lg:col-span-9">
           <div className="w-full mb-8 rounded-md">
             <Image
-              src={singleBlog.data.blogImage}
-              alt={singleBlog.data.blogTitle}
+              src={singleBlogResponse.data.image}
+              alt={singleBlogResponse.data.title}
               width={600}
               height={400}
               className="object-cover rounded-md"
@@ -107,7 +101,7 @@ export default function BlogDetailPage() {
           <div
             className="prose prose-lg max-w-none blog-content"
             dangerouslySetInnerHTML={{
-              __html: singleBlog.data.blogDescription.replace(
+              __html: singleBlogResponse.data.description.replace(
                 /<p><\/p>/g,
                 "<br />"
               ),
@@ -117,10 +111,7 @@ export default function BlogDetailPage() {
 
         {/* related blogs */}
         <div className="col-span-12 md:col-span-4 lg:col-span-3">
-          <RelatedBlogs
-            currentBlogId={blogId}
-            tags={singleBlog.data.blogTags}
-          />
+          <RelatedBlogs tags={singleBlogResponse.data.tags} />
         </div>
       </div>
     </Container>
