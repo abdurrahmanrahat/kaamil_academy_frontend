@@ -19,7 +19,7 @@ const CourseCard = () => {
             className="w-full h-48 object-cover"
           />
           <Badge className="absolute top-3 right-3 bg-primary text-white">
-            ৳২৫০
+            ৳৩৫০
           </Badge>
         </div>
 

@@ -1,8 +1,7 @@
-"use client";
-
 import Container from "@/components/shared/Ui/Container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 const RegistrationCTA = () => {
   return (
@@ -26,17 +25,28 @@ const RegistrationCTA = () => {
                 আজই শুরু করুন আপনার কুরআন শিক্ষার যাত্রা
               </h2>
 
-              <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+              <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
                 সীমিত সিট — দেরি না করে এখনই রেজিস্ট্রেশন সম্পন্ন করুন
               </p>
 
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90 font-bold text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 group"
-              >
-                এখনই রেজিস্ট্রেশন করুন
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="mb-6">
+                <h4 className="flex items-center justify-center gap-2">
+                  <span className="text-4xl font-bold">৳৩৫০</span>{" "}
+                  <span className="text-emerald-100 text-sm">
+                    (রেজিস্ট্রেশন ফি)
+                  </span>
+                </h4>
+              </div>
+
+              <Link href="/quran-lc-basic/registration">
+                <Button
+                  size="lg"
+                  className="bg-white text-primary hover:bg-white/90 font-bold text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 group"
+                >
+                  এখনই রেজিস্ট্রেশন করুন
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
 
               <p className="mt-4 text-sm text-white/80">
                 রেজিস্ট্রেশন সংক্রান্ত যেকোনো প্রশ্নের জন্য আমাদের সাথে যোগাযোগ
