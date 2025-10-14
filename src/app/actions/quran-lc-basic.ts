@@ -104,21 +104,21 @@ export const addQuranLCBasicStudentToDB = async (
       }
     );
 
-    if (!res.ok) {
-      return {
-        success: false,
-        data: null,
-        message: "Failed to registration on Quran LC Basic student",
-      };
-    }
+    // if (!res.ok) {
+    //   return {
+    //     success: false,
+    //     data: null,
+    //     message: "Failed to registration on Quran LC Basic student",
+    //   };
+    // }
 
     const data = await res.json();
     revalidateTag(tagLists.QURAN_LC_BASIC);
 
     return {
-      success: data?.success ?? true,
+      success: data?.success,
       data: data?.data || null,
-      message: data?.message || "Student added successfully",
+      message: data?.message,
     };
   } catch (error: any) {
     console.error("Error adding Quran LC Basic student:", error);

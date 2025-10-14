@@ -54,20 +54,12 @@ const StatusChangeDropdown = ({
           onValueChange={updateStatus}
         >
           <DropdownMenuRadioItem
-            value="default"
+            value="pending"
             className={`${
-              currentStatus === "default" ? "text-green-500" : ""
+              currentStatus === "pending" ? "text-green-500" : ""
             } cursor-pointer`}
           >
-            Default
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem
-            value="waiting"
-            className={`${
-              currentStatus === "waiting" ? "text-green-500" : ""
-            } cursor-pointer`}
-          >
-            Waiting
+            Pending
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
             value="completed"

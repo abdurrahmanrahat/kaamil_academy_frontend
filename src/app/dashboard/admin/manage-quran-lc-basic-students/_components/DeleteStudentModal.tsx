@@ -15,7 +15,13 @@ import {
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-const DeleteStudentModal = ({ studentId }: { studentId: string }) => {
+const DeleteStudentModal = ({
+  studentId,
+  status,
+}: {
+  studentId: string;
+  status: "pending" | "completed";
+}) => {
   const handleDeleteQuranLCBasicStudent = async () => {
     try {
       const res = await deleteQuranLCBasicStudentFromDB(studentId);
@@ -35,7 +41,11 @@ const DeleteStudentModal = ({ studentId }: { studentId: string }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Trash2 className="text-red-700 cursor-pointer" />
+        <Trash2
+          className={`cursor-pointer ${
+            status === "completed" ? "text-red-700" : "text-gray-200"
+          }`}
+        />
       </DialogTrigger>
       <DialogContent className="max-w-[480px] bg-white border-none">
         <DialogHeader>

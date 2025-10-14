@@ -43,15 +43,7 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                     </p>
                   </div>
                 </div>
-                {/* <div className="flex items-start gap-4">
-                  <Mail className="h-5 w-5 mt-1" />
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">Email</p>
-                    <p className="text-sm text-muted-foreground">
-                      {student.userEmail}
-                    </p>
-                  </div>
-                </div> */}
+
                 <div className="flex items-start gap-4">
                   <Calendar className="h-5 w-5 mt-1" />
                   <div className="space-y-1">
@@ -82,10 +74,10 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                     variant="outline"
                     className={`${
                       student.status === "completed" &&
-                      "bg-green-500 hover:bg-green-500 text-white"
+                      "bg-green-600 hover:bg-green-600 text-white"
                     } ${
-                      student.status === "waiting" &&
-                      "bg-red-400 hover:bg-red-500 text-white"
+                      student.status === "pending" &&
+                      "bg-red-500 hover:bg-red-600 text-white"
                     } capitalize`}
                   >
                     {student.status}
@@ -118,25 +110,6 @@ const StudentDetailsModal = ({ student }: { student: TQuranLCBasic }) => {
                     <p className="text-sm text-muted-foreground">
                       WhatsApp: {student.whatsAppNumber}
                     </p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <p className="text-base font-semibold">Payment Details</p>
-                    <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground capitalize">
-                        Method:{" "}
-                        <span className="text-gray-700 uppercase">
-                          {student.paymentMethod}
-                        </span>
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Pay Digits:{" "}
-                        <span className="text-gray-700">
-                          {student.RegFeeNumber}
-                        </span>
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>

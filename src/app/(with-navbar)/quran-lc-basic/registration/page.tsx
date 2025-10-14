@@ -22,12 +22,8 @@ const quranLCBasicRegistrationSchema = z.object({
   dateOfBirth: z.string().min(1, "জন্ম তারিখ আবশ্যক"),
   profession: z.string().min(1, "পেশা আবশ্যক"),
   address: z.string().min(1, "ঠিকানা আবশ্যক"),
-  phoneNumber: z.string().min(11, "সঠিক মোবাইল নাম্বার দিন").max(14),
-  whatsAppNumber: z.string().min(11, "সঠিক হোয়াটসঅ্যাপ নাম্বার দিন").max(14),
-  paymentMethod: z.enum(["bkash", "nagad", "bank"], {
-    errorMap: () => ({ message: "পেমেন্ট মাধ্যম নির্বাচন করুন" }),
-  }),
-  RegFeeNumber: z.string().min(6, "কমপক্ষে ৬ ডিজিট দিন"),
+  phoneNumber: z.string().min(11, "সঠিক মোবাইল নাম্বার দিন"),
+  whatsAppNumber: z.string().min(11, "সঠিক হোয়াটসঅ্যাপ নাম্বার দিন"),
 });
 
 const quranLCBasicRegistrationDefaultValues = {
@@ -38,8 +34,6 @@ const quranLCBasicRegistrationDefaultValues = {
   address: "",
   phoneNumber: "",
   whatsAppNumber: "",
-  paymentMethod: "",
-  RegFeeNumber: "",
 };
 
 const QuranLCBasicRegistration = () => {
@@ -53,6 +47,8 @@ const QuranLCBasicRegistration = () => {
     try {
       const studentData = { ...values, batch: "batch-03" };
       const res = await addQuranLCBasicStudentToDB(studentData);
+
+      console.log("res from registration", res);
 
       if (res.success) {
         toast.success(res.message);
@@ -174,56 +170,6 @@ const QuranLCBasicRegistration = () => {
                 <span className="text-red-600 font-semibold">*</span>
               </label>
               <KAInput name="whatsAppNumber" type="number" placeholder="" />
-            </div>
-          </div>
-
-          <div className="mt-14">
-            <h2 className=" text-lg md:text-xl font-medium text-center mb-8">
-              আপনি এই{" "}
-              <span className="italic text-primary font-semibold">
-                01788880835
-              </span>{" "}
-              নাম্বারে রেজিষ্ট্রেশন ফি{" "}
-              <span className="italic text-primary font-semibold">২৫০</span>{" "}
-              টাকা বিকাশ/নগদ থেকে সেন্ড মানি করুন
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-              {/* gander */}
-              <div>
-                <label
-                  htmlFor="paymentMethod"
-                  className="block text-start font-medium mb-[2px]"
-                >
-                  আপনি কোন মাধ্যমে ফি পাঠিয়েছেন?{" "}
-                  <span className="text-red-600 font-semibold">*</span>
-                </label>
-                <KASelect
-                  name="paymentMethod"
-                  options={[
-                    { value: "bkash", label: "বিকাশ" },
-                    { value: "nagad", label: "নগদ" },
-                  ]}
-                  placeholder=""
-                />
-              </div>
-
-              {/*"phoneNumber */}
-              <div>
-                <label
-                  htmlFor="RegFeeNumber"
-                  className="block text-start font-medium mb-[2px]"
-                >
-                  যে নাম্বার থেকে রেজি. ফি পাঠিয়েছেন সেই নাম্বার টি লিখুন{" "}
-                  <span className="text-red-600 font-semibold">*</span>
-                </label>
-                <KAInput
-                  name="RegFeeNumber"
-                  //   type="number"
-
-                  placeholder=""
-                />
-              </div>
             </div>
           </div>
 

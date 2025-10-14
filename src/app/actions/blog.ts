@@ -1,22 +1,16 @@
 "use server";
 
 import { tagLists } from "@/constants/tag";
+import { TServerResponse } from "@/types/action.type";
 import { revalidateTag } from "next/cache";
 import { fetchWithAuth } from "./fetchWithAuth";
-
-// 🔹 Common response type for safety
-interface ServerResponse<T = any> {
-  success: boolean;
-  data: T;
-  message: string;
-}
 
 /* ============================================
    Get All Blogs
 ============================================ */
 export const getAllBlogsFromDB = async (
   params?: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const queryParams = params
       ? "?" + new URLSearchParams(params).toString()
@@ -51,7 +45,7 @@ export const getAllBlogsFromDB = async (
 ============================================ */
 export const getSingleBlogFromDB = async (
   blogId: string
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
@@ -82,7 +76,7 @@ export const getSingleBlogFromDB = async (
 ============================================ */
 export const addBlogToDB = async (
   blogData: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/create-blog`,
@@ -94,17 +88,17 @@ export const addBlogToDB = async (
       }
     );
 
-    if (!res.ok) {
-      return { success: false, data: null, message: "Failed to create blog" };
-    }
+    // if (!res.ok) {
+    //   return { success: false, data: null, message: "Failed to create blog" };
+    // }
 
     const data = await res.json();
     revalidateTag(tagLists.BLOG);
 
     return {
-      success: data?.success ?? true,
+      success: data?.success,
       data: data?.data || null,
-      message: data?.message || "Blog created successfully",
+      message: data?.message,
     };
   } catch (error: any) {
     console.error("Error adding blog:", error);
@@ -118,7 +112,7 @@ export const addBlogToDB = async (
 export const updateBlogInDB = async (
   blogId: string,
   updatedData: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
@@ -153,7 +147,7 @@ export const updateBlogInDB = async (
 ============================================ */
 export const deleteBlogFromDB = async (
   blogId: string
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,

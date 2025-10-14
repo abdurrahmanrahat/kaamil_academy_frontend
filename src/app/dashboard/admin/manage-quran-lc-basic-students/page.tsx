@@ -84,14 +84,7 @@ const ManageQuranLCBasicStudentPage = async (props: {
                       #
                     </TableHead>
                     <TableHead className="text-base text-white font-medium py-3">
-                      Username
-                    </TableHead>
-
-                    <TableHead className="text-base text-white font-medium py-3">
-                      Payment Method
-                    </TableHead>
-                    <TableHead className="text-base text-white font-medium py-3">
-                      Payment Digits
+                      Name
                     </TableHead>
                     <TableHead className="text-base text-white font-medium py-3">
                       Phone Number
@@ -123,10 +116,10 @@ const ManageQuranLCBasicStudentPage = async (props: {
                         key={user._id}
                         className={`${
                           user.status === "completed" &&
-                          "bg-green-500 hover:bg-green-500 text-white"
+                          "bg-green-600 hover:bg-green-600 text-white"
                         } ${
-                          user.status === "waiting" &&
-                          "bg-red-400 hover:bg-red-500 text-white"
+                          user.status === "pending" &&
+                          "bg-red-500 hover:bg-red-600 text-white"
                         } `}
                       >
                         <TableCell className="font-semibold">
@@ -135,8 +128,6 @@ const ManageQuranLCBasicStudentPage = async (props: {
                         <TableCell className="font-medium">
                           {user.userName}
                         </TableCell>
-                        <TableCell>{user.paymentMethod}</TableCell>
-                        <TableCell>{user.RegFeeNumber}</TableCell>
                         <TableCell>{user.phoneNumber}</TableCell>
                         <TableCell>{user.userGender}</TableCell>
                         <TableCell>{user.batch}</TableCell>
@@ -153,7 +144,10 @@ const ManageQuranLCBasicStudentPage = async (props: {
                           />
                         </TableCell>
                         <TableCell>
-                          <DeleteStudentModal studentId={user._id} />
+                          <DeleteStudentModal
+                            studentId={user._id}
+                            status={user.status}
+                          />
                         </TableCell>
                       </TableRow>
                     )

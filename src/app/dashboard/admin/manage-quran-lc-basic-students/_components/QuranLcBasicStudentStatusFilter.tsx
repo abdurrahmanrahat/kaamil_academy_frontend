@@ -57,9 +57,8 @@ const QuranLcBasicStudentStatusFilter = () => {
       <SelectContent>
         <SelectGroup>
           <SelectItem value="all">{allStudentsPlaceholder}</SelectItem>
-          <SelectItem value="default">Default</SelectItem>
+          <SelectItem value="pending">Pending</SelectItem>
           <SelectItem value="completed">Completed</SelectItem>
-          <SelectItem value="waiting">Waiting</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
