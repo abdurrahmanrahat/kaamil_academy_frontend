@@ -16,7 +16,7 @@ export default function CourseCard() {
             alt="কুরআন শিক্ষা কোর্স"
             width={400}
             height={240}
-            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
           {/* Price Badge */}
@@ -31,8 +31,8 @@ export default function CourseCard() {
         </div>
 
         {/* Content */}
-        <CardContent className="p-4">
-          <h3 className="font-semibold text-xl text-gray-900 dark:text-gray-100 mb-3 text-center">
+        <CardContent className="pb-4">
+          <h3 className="font-semibold text-xl text-gray-900 dark:text-gray-100 mb-4 text-center">
             কুরআন শিক্ষা কোর্স
           </h3>
 

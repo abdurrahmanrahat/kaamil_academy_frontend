@@ -1,5 +1,7 @@
 import { getAllBlogsFromDB } from "@/app/actions/blog";
 import Container from "@/components/shared/Ui/Container";
+import NoDataFound from "@/components/shared/Ui/NoDataFound";
+import NoDataFoundBySearchFilter from "@/components/shared/Ui/NoDataFoundBySearchFilter";
 import { TBlog } from "@/types";
 import { BlogCard } from "./_components/BlogCard";
 import BlogFiltering from "./_components/BlogFiltering";
@@ -28,16 +30,6 @@ const BlogsPage = async (props: {
 
   const blogsResponse = await getAllBlogsFromDB(params);
 
-  if (!blogsResponse?.success) {
-    return (
-      <div className="text-center py-12">
-        <h3 className="text-2xl font-medium text-gray-800">
-          কোন ব্লগ পাওয়া যায়নি
-        </h3>
-      </div>
-    );
-  }
-
   return (
     <Container className="py-16 lg:py-20">
       <div className="mx-auto px-4 pb-12 lg:pb-16">
@@ -58,21 +50,26 @@ const BlogsPage = async (props: {
       </div>
 
       <div>
-        {blogsResponse?.data?.data?.length === 0 ? (
-          <div className="text-center py-12">
-            <h3 className="text-2xl font-medium text-gray-800">
-              কোন ব্লগ পাওয়া যায়নি
-            </h3>
-            <p className="text-gray-500 mt-2">
-              অন্য কিছু খুঁজে দেখুন অথবা সব ফিল্টার পরিষ্কার করুন
-            </p>
-          </div>
+        {!blogsResponse?.success ? (
+          <NoDataFound
+            title="কোন ব্লগ পাওয়া যায়নি"
+            description="বর্তমানে কোনো ব্লগ উপলব্ধ নেই। নতুন কিছু প্রকাশ হলে এখানে দেখতে পারবেন।"
+          />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {blogsResponse?.data?.data?.map((blog: TBlog) => (
-              <BlogCard key={blog._id} blog={blog} />
-            ))}
-          </div>
+          <>
+            {blogsResponse?.data?.data?.length === 0 ? (
+              <NoDataFoundBySearchFilter
+                title="কোন ব্লগ পাওয়া যায়নি"
+                description="অন্য কিছু খুঁজে দেখুন অথবা সব ফিল্টার পরিষ্কার করুন"
+              />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {blogsResponse?.data?.data?.map((blog: TBlog) => (
+                  <BlogCard key={blog._id} blog={blog} />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </Container>

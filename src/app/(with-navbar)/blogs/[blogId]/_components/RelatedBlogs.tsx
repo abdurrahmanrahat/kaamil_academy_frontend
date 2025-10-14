@@ -1,4 +1,5 @@
 import { getAllBlogsFromDB } from "@/app/actions/blog";
+import NoDataFoundBySearchFilter from "@/components/shared/Ui/NoDataFoundBySearchFilter";
 import { TBlog } from "@/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -16,9 +17,10 @@ const RelatedBlogs = async ({ tags }: { tags: string[] }) => {
 
   if (!blogsResponse.success || blogs.length === 0) {
     return (
-      <p className="text-gray-500 text-center py-4">
-        কোন সম্পর্কিত ব্লগ পাওয়া যায়নি
-      </p>
+      <NoDataFoundBySearchFilter
+        title="কোন সম্পর্কিত ব্লগ পাওয়া যায়নি"
+        description="এই ব্লগের সঙ্গে মিল পাওয়া যায়নি। নতুন কোনো ব্লগে খুঁজুন"
+      />
     );
   }
 
