@@ -1,7 +1,4 @@
 import { getQuranLCBasicStudentsFromDB } from "@/app/actions/quran-lc-basic";
-import DeleteStudentModal from "@/components/dashboard/Admin/ManageQuranLCBasic/DeleteStudentModal";
-import StatusChangeDropdown from "@/components/dashboard/Admin/ManageQuranLCBasic/StatusChangeDropdown";
-import StudentDetailsModal from "@/components/dashboard/Admin/ManageQuranLCBasic/StudentDetailsModal";
 import NoDataFound from "@/components/shared/Ui/NoDataFound";
 import NoDataFoundBySearchFilter from "@/components/shared/Ui/NoDataFoundBySearchFilter";
 import {
@@ -13,10 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TQuranLCBasic } from "@/types/quran-lc-basic.type";
+import DeleteStudentModal from "./_components/DeleteStudentModal";
 import QuranLcBasicStudentBatchFilter from "./_components/QuranLcBasicStudentBatchFilter";
 import QuranLcBasicStudentGenderFilter from "./_components/QuranLcBasicStudentGenderFilter";
 import QuranLcBasicStudentSearch from "./_components/QuranLcBasicStudentSearch";
 import QuranLcBasicStudentStatusFilter from "./_components/QuranLcBasicStudentStatusFilter";
+import StatusChangeDropdown from "./_components/StatusChangeDropdown";
+import StudentDetailsModal from "./_components/StudentDetailsModal";
 
 type TQuranLCBasicStudentParams = {
   searchTerm?: string;

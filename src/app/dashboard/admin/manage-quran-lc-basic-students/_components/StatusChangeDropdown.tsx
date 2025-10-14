@@ -1,5 +1,6 @@
 "use client";
 
+import { updateQuranLCBasicStudentInDB } from "@/app/actions/quran-lc-basic";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,7 +9,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useUpdateQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { Ellipsis } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,18 +19,17 @@ const StatusChangeDropdown = ({
   studentId: string;
   currentStatus: string;
 }) => {
-  // rtk api
-  const [updateQuranLCBasicStudent] = useUpdateQuranLCBasicStudentMutation();
-
   const updateStatus = async (newStatus: string) => {
     try {
-      // Replace this URL with your actual backend endpoint
-      const res = await updateQuranLCBasicStudent({
-        studentId,
-        updatedData: { status: newStatus },
-      }).unwrap();
+      const res = await updateQuranLCBasicStudentInDB(studentId, {
+        status: newStatus,
+      });
 
-      toast.success(res.message);
+      if (res?.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res?.message || "Something went wrong!");
+      }
     } catch (error: any) {
       console.error("Error updating status:", error);
       toast.error(

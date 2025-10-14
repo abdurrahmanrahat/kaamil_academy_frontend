@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteQuranLCBasicStudentFromDB } from "@/app/actions/quran-lc-basic";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,24 +12,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useDeleteQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 const DeleteStudentModal = ({ studentId }: { studentId: string }) => {
-  // redux api
-  const [deleteQuranLCBasicStudent] = useDeleteQuranLCBasicStudentMutation();
-
   const handleDeleteQuranLCBasicStudent = async () => {
     try {
-      const res = await deleteQuranLCBasicStudent(studentId).unwrap();
+      const res = await deleteQuranLCBasicStudentFromDB(studentId);
 
       if (res.success) {
         toast.success(res.message);
+      } else {
+        toast.error(res?.message || "Something went wrong!");
       }
     } catch (error: any) {
       toast.error(
-        error?.data?.errorSources[0].message || "something went wrong!"
+        error?.data?.errorSources[0].message || "Something went wrong!"
       );
     }
   };

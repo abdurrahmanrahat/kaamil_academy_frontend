@@ -22,6 +22,8 @@ const DeleteBlogModal = ({ blogId }: { blogId: string }) => {
 
       if (res.success) {
         toast.success(res.message);
+      } else {
+        toast.error(res?.message || "Something went wrong!");
       }
     } catch (error: any) {
       toast.error(
