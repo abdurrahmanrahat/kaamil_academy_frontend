@@ -4,16 +4,10 @@ import { Controller, useFormContext } from "react-hook-form";
 type TMTInputProps = {
   name: string;
   type?: string;
-  className?: string;
   placeholder?: string;
 };
 
-const KAInput = ({
-  name,
-  type = "text",
-  className,
-  placeholder,
-}: TMTInputProps) => {
+const KAInput = ({ name, type = "text", placeholder }: TMTInputProps) => {
   const {
     control,
     formState: { errors },
@@ -28,7 +22,7 @@ const KAInput = ({
           <Input
             {...field}
             type={type}
-            className={`h-11 ${className}`}
+            className={`h-11 `}
             placeholder={placeholder ? placeholder : ""}
           />
         )}

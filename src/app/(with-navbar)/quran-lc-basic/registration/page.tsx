@@ -1,5 +1,6 @@
 "use client";
 
+import { addQuranLCBasicStudentToDB } from "@/app/actions/quran-lc-basic";
 import KADatePicker from "@/components/shared/Forms/KADatePicker";
 import KAForm from "@/components/shared/Forms/KAForm";
 import KAInput from "@/components/shared/Forms/KAInput";
@@ -7,7 +8,6 @@ import KASelect from "@/components/shared/Forms/KASelect";
 import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
 import SectionTitle from "@/components/shared/Ui/SectionTitle";
 import { Button } from "@/components/ui/button";
-import { useAddQuranLCBasicStudentMutation } from "@/redux/api/quran-lc-basicApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
@@ -47,29 +47,25 @@ const QuranLCBasicRegistration = () => {
 
   const router = useRouter();
 
-  // redux api
-  const [
-    addQuranLCBasicStudentRegistration,
-    { isLoading: isQuranLCBasicStudentRegistrationLoading },
-  ] = useAddQuranLCBasicStudentMutation();
-
   const handleQuranLCBasicRegistration = async (values: FieldValues) => {
     setIsLoading(true);
 
     try {
-      const newStudent = { ...values, batch: "batch-01" };
-      const res = await addQuranLCBasicStudentRegistration(newStudent).unwrap();
+      const studentData = { ...values, batch: "batch-03" };
+      const res = await addQuranLCBasicStudentToDB(studentData);
 
       if (res.success) {
         toast.success(res.message);
-
-        setIsLoading(false);
 
         // navigate user
         router.push(
           `/quran-lc-basic/success?secret=${process.env.NEXT_PUBLIC_SECRET_URL_KEY}`
         );
+      } else {
+        toast.error(res?.message || "Something went wrong!");
       }
+
+      setIsLoading(false);
     } catch (error: any) {
       toast.error(
         error?.data?.errorSources[0].message || "Something went wrong!"
@@ -98,7 +94,7 @@ const QuranLCBasicRegistration = () => {
               >
                 আপনার নাম <span className="text-red-600 font-semibold">*</span>
               </label>
-              <KAInput name="userName" className="" placeholder="" />
+              <KAInput name="userName" placeholder="" />
             </div>
 
             {/* gander */}
@@ -116,7 +112,6 @@ const QuranLCBasicRegistration = () => {
                   { value: "female", label: "ফিমেইল (মেয়ে)" },
                 ]}
                 placeholder=""
-                className=""
               />
             </div>
 
@@ -143,7 +138,7 @@ const QuranLCBasicRegistration = () => {
               >
                 পেশা <span className="text-red-600 font-semibold">*</span>
               </label>
-              <KAInput name="profession" className="" placeholder="" />
+              <KAInput name="profession" placeholder="" />
             </div>
 
             {/* address */}
@@ -154,7 +149,7 @@ const QuranLCBasicRegistration = () => {
               >
                 ঠিকানা <span className="text-red-600 font-semibold">*</span>
               </label>
-              <KAInput name="address" className="" placeholder="" />
+              <KAInput name="address" placeholder="" />
             </div>
 
             {/*"phoneNumber */}
@@ -166,12 +161,7 @@ const QuranLCBasicRegistration = () => {
                 মেবাইল নাম্বার{" "}
                 <span className="text-red-600 font-semibold">*</span>
               </label>
-              <KAInput
-                name="phoneNumber"
-                type="number"
-                className=""
-                placeholder=""
-              />
+              <KAInput name="phoneNumber" type="number" placeholder="" />
             </div>
 
             {/* WhatsAppNumber */}
@@ -183,12 +173,7 @@ const QuranLCBasicRegistration = () => {
                 হোয়াটসঅ্যাপ নাম্বার{" "}
                 <span className="text-red-600 font-semibold">*</span>
               </label>
-              <KAInput
-                name="whatsAppNumber"
-                type="number"
-                className=""
-                placeholder=""
-              />
+              <KAInput name="whatsAppNumber" type="number" placeholder="" />
             </div>
           </div>
 
@@ -220,7 +205,6 @@ const QuranLCBasicRegistration = () => {
                     { value: "nagad", label: "নগদ" },
                   ]}
                   placeholder=""
-                  className=""
                 />
               </div>
 
@@ -236,7 +220,7 @@ const QuranLCBasicRegistration = () => {
                 <KAInput
                   name="RegFeeNumber"
                   //   type="number"
-                  className=""
+
                   placeholder=""
                 />
               </div>
@@ -248,9 +232,9 @@ const QuranLCBasicRegistration = () => {
             <Button
               className="h-11 cursor-pointer"
               type="submit"
-              disabled={isQuranLCBasicStudentRegistrationLoading || isLoading}
+              disabled={isLoading}
             >
-              {isQuranLCBasicStudentRegistrationLoading || isLoading ? (
+              {isLoading ? (
                 <span className="space-x-2 flex items-center">
                   <LoaderSpinner /> <span>Processing...</span>
                 </span>

@@ -18,15 +18,9 @@ type TKASelectProps = {
   name: string;
   options: TSelectOption[];
   placeholder?: string;
-  className?: string;
 };
 
-const KASelect = ({
-  name,
-  options,
-  placeholder,
-  className,
-}: TKASelectProps) => {
+const KASelect = ({ name, options, placeholder }: TKASelectProps) => {
   const {
     control,
     formState: { errors },
@@ -40,7 +34,7 @@ const KASelect = ({
         render={({ field }) => (
           <Select value={field.value} onValueChange={field.onChange}>
             <SelectTrigger
-              className={`${className} h-11 w-full cursor-pointer rounded-md border bg-white px-3 py-5 text-sm shadow-xs `}
+              className={`h-11 w-full cursor-pointer rounded-md border bg-white px-3 py-[21px] text-sm shadow-xs `}
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>

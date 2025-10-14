@@ -1,21 +1,16 @@
 "use server";
 
 import { tagLists } from "@/constants/tag"; // must include "QURAN_LC_BASIC"
+import { TServerResponse } from "@/types/action.type";
 import { revalidateTag } from "next/cache";
 import { fetchWithAuth } from "./fetchWithAuth";
-
-interface ServerResponse<T = any> {
-  success: boolean;
-  data: T;
-  message: string;
-}
 
 /* ============================================
    Get All Students
 ============================================ */
 export const getQuranLCBasicStudentsFromDB = async (
   params?: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const queryParams = params
       ? "?" + new URLSearchParams(params).toString()
@@ -54,11 +49,11 @@ export const getQuranLCBasicStudentsFromDB = async (
 };
 
 /* ============================================
-   2️⃣ Get Single Student
+  Get Single Student
 ============================================ */
 export const getSingleQuranLCBasicStudentFromDB = async (
   studentId: string
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/quran-lc-basic-students/${studentId}`,
@@ -93,11 +88,11 @@ export const getSingleQuranLCBasicStudentFromDB = async (
 };
 
 /* ============================================
-   3️⃣ Add New Student
+  Add New Student
 ============================================ */
 export const addQuranLCBasicStudentToDB = async (
   studentData: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/quran-lc-basic-students/create-quran-lc-basic-student`,
@@ -113,7 +108,7 @@ export const addQuranLCBasicStudentToDB = async (
       return {
         success: false,
         data: null,
-        message: "Failed to create Quran LC Basic student",
+        message: "Failed to registration on Quran LC Basic student",
       };
     }
 
@@ -130,18 +125,18 @@ export const addQuranLCBasicStudentToDB = async (
     return {
       success: false,
       data: null,
-      message: "Network or server error while adding student",
+      message: "Network or server error while registration",
     };
   }
 };
 
 /* ============================================
-   4️⃣ Update Student
+  Update Student
 ============================================ */
 export const updateQuranLCBasicStudentInDB = async (
   studentId: string,
   updatedData: Record<string, any>
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/quran-lc-basic-students/${studentId}`,
@@ -180,11 +175,11 @@ export const updateQuranLCBasicStudentInDB = async (
 };
 
 /* ============================================
-   5️⃣ Delete Student
+  Delete Student
 ============================================ */
 export const deleteQuranLCBasicStudentFromDB = async (
   studentId: string
-): Promise<ServerResponse> => {
+): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/quran-lc-basic-students/${studentId}`,

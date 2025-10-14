@@ -70,9 +70,12 @@ const AddBlogForm = ({ userId }: { userId: string }) => {
 
             if (res.success) {
               toast.success(res.message);
+
+              router.push("/dashboard/admin/manage-blogs");
+            } else {
+              toast.error(res?.message || "Something went wrong!");
             }
 
-            router.push("/dashboard/admin/manage-blogs");
             setIsUploadingBlog(false);
           } catch (error: any) {
             toast.error(

@@ -7,14 +7,12 @@ import { BlogCard } from "./_components/BlogCard";
 import BlogFiltering from "./_components/BlogFiltering";
 import BlogSearch from "./_components/BlogSearch";
 
-type TBlogSearchParams = {
+type TBlogParams = {
   searchTerm?: string;
   tags?: string;
 };
 
-const BlogsPage = async (props: {
-  searchParams: Promise<TBlogSearchParams>;
-}) => {
+const BlogsPage = async (props: { searchParams: Promise<TBlogParams> }) => {
   const searchParams = await props.searchParams;
   const { searchTerm, tags } = searchParams || {};
 
@@ -53,7 +51,7 @@ const BlogsPage = async (props: {
         {!blogsResponse?.success ? (
           <NoDataFound
             title="কোন ব্লগ পাওয়া যায়নি"
-            description="বর্তমানে কোনো ব্লগ উপলব্ধ নেই। নতুন কিছু প্রকাশ হলে এখানে দেখতে পারবেন।"
+            description="বর্তমানে কোনো ব্লগ জমা নেই। নতুন কিছু প্রকাশ হলে এখানে দেখতে পারবেন।"
           />
         ) : (
           <>
