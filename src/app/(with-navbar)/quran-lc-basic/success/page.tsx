@@ -30,9 +30,9 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
   return (
     <Container>
       <div className="min-h-screen flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl border-green-200 shadow-cardLightShadow overflow-hidden p-0">
+        <Card className="w-full max-w-2xl border-green-200 shadow-cardLightShadow overflow-hidden p-0 m-0">
           {/* Success Banner */}
-          <div className="bg-green-600 text-white py-6 px-8 text-center relative">
+          <div className="bg-green-600 text-white py-6 px-4 md:px-8 text-center relative">
             <div className="absolute top-0 left-0 w-full h-full opacity-10">
               <div className="w-full h-full bg-[url('/placeholder.svg?height=200&width=200')] bg-repeat-space"></div>
             </div>
@@ -40,14 +40,14 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
               <div className="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
-              <h1 className="text-2xl font-bold">
+              <h1 className="text-xl md:text-2xl font-bold">
                 আপনার রেজিষ্ট্রেশন সম্পন্ন হয়েছে
               </h1>
               <p className="text-green-100 mt-1">জাযাকাল্লাহু খাইর</p>
             </div>
           </div>
 
-          <CardContent className="p-8">
+          <CardContent className="py-6 px-4 md:px-8 m-0">
             {/* Welcome Message */}
             <div className="text-center mb-8">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">

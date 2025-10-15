@@ -17,8 +17,8 @@ const QuranLCBasicPaymentModal = ({
   const handleMakePayment = async (paymentMethod: string) => {
     try {
       const paymentData = {
-        // amount: 350,
-        amount: 1,
+        amount: 350,
+        // amount: 1,
         paymentForId: studentRegisterId,
         paymentSuccessURL: `/quran-lc-basic/success`,
         paymentFailedURL: `/quran-lc-basic/fail`,

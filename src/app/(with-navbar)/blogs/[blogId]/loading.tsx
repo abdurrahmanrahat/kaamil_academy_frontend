@@ -1,11 +1,11 @@
 import { MyLoader } from "@/components/shared/Ui/MyLoader";
 
-const BlogsLoadingPage = () => {
+const BlogLoadingPage = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <MyLoader text="Blogs Loading..." />
+      <MyLoader text="Blog Loading..." />
     </div>
   );
 };
 
-export default BlogsLoadingPage;
+export default BlogLoadingPage;

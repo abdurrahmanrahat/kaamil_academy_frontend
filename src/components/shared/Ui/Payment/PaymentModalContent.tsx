@@ -15,7 +15,7 @@ const PaymentModalContent = ({
   onMakePayment: (paymentMethod: string) => void;
 }) => {
   return (
-    <DialogContent className="w-full max-w-[480px]!">
+    <DialogContent className="max-w-[480px]!">
       <DialogHeader>
         <DialogTitle className="text-xl md:text-2xl">পেমেন্ট করুন</DialogTitle>
         <DialogDescription className="pt-2 text-black text-sm sm:text-base">

@@ -1,7 +1,9 @@
+import { MyLoader } from "@/components/shared/Ui/MyLoader";
+
 const ManageQuranLCBasicStudentLoadingPage = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      Quran LC Basic Students Loading...
+      <MyLoader text="Quran LC Basic Students Loading..." />
     </div>
   );
 };
