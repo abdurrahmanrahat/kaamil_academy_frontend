@@ -3,9 +3,15 @@ import Container from "@/components/shared/Ui/Container";
 import NoDataFound from "@/components/shared/Ui/NoDataFound";
 import NoDataFoundBySearchFilter from "@/components/shared/Ui/NoDataFoundBySearchFilter";
 import { TBlog } from "@/types";
+import { Metadata } from "next";
 import { BlogCard } from "./_components/BlogCard";
 import BlogFiltering from "./_components/BlogFiltering";
 import BlogSearch from "./_components/BlogSearch";
+
+export const metadata: Metadata = {
+  title: "Blogs | Kaamil Academy",
+  description: "We provide Quran learning opportunities for general students",
+};
 
 type TBlogParams = {
   searchTerm?: string;

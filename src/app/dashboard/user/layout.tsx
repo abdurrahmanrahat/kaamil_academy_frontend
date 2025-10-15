@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 import UserLayout from "./layout/UserLayout";
 
 export const metadata: Metadata = {
-  title: "User Dashboard",
-  description: "Welcome to ",
+  title: "Student Dashboard",
+  description: "We provide Quran learning opportunities for general students",
 };
 
 const UserDashboardLayout = ({ children }: { children: ReactNode }) => {

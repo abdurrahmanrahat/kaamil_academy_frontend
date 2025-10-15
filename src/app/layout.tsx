@@ -23,7 +23,7 @@ const tiroBangla = Tiro_Bangla({
 
 export const metadata: Metadata = {
   title: "Kaamil Academy",
-  description: "A short description comes here",
+  description: "We provide Quran learning opportunities for general students",
 };
 
 export default function RootLayout({

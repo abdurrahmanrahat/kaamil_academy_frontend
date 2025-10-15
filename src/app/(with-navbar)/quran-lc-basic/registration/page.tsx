@@ -1,195 +1,38 @@
-"use client";
+// import BannerImage from "@/asserts/course/quran-basic-page-banner.jpg";
+import { IMAGES } from "@/image-data";
+import { Metadata } from "next";
+import QuranLCBasicRegistrationForm from "./_components/QuranLCBasicRegistrationForm";
 
-import { addQuranLCBasicStudentToDB } from "@/app/actions/quran-lc-basic";
-import KADatePicker from "@/components/shared/Forms/KADatePicker";
-import KAForm from "@/components/shared/Forms/KAForm";
-import KAInput from "@/components/shared/Forms/KAInput";
-import KASelect from "@/components/shared/Forms/KASelect";
-import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
-import SectionTitle from "@/components/shared/Ui/SectionTitle";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-
-const quranLCBasicRegistrationSchema = z.object({
-  userName: z.string().min(1, "আপনার নাম আবশ্যক"),
-  userGender: z.enum(["male", "female"], {
-    errorMap: () => ({ message: "জেন্ডার নির্বাচন করুন" }),
-  }),
-  dateOfBirth: z.string().min(1, "জন্ম তারিখ আবশ্যক"),
-  profession: z.string().min(1, "পেশা আবশ্যক"),
-  address: z.string().min(1, "ঠিকানা আবশ্যক"),
-  phoneNumber: z.string().min(11, "সঠিক মোবাইল নাম্বার দিন"),
-  whatsAppNumber: z.string().min(11, "সঠিক হোয়াটসঅ্যাপ নাম্বার দিন"),
-});
-
-const quranLCBasicRegistrationDefaultValues = {
-  userName: "",
-  userGender: "",
-  dateOfBirth: "",
-  profession: "",
-  address: "",
-  phoneNumber: "",
-  whatsAppNumber: "",
+export const metadata: Metadata = {
+  title: "Quran Basic Course | Kaamil Academy",
+  description: "We provide Quran learning opportunities for general students",
 };
 
 const QuranLCBasicRegistration = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const router = useRouter();
-
-  const handleQuranLCBasicRegistration = async (values: FieldValues) => {
-    setIsLoading(true);
-
-    try {
-      const studentData = { ...values, batch: "batch-03" };
-      const res = await addQuranLCBasicStudentToDB(studentData);
-
-      console.log("res from registration", res);
-
-      if (res.success) {
-        toast.success(res.message);
-
-        // navigate user
-        router.push(
-          `/quran-lc-basic/success?secret=${process.env.NEXT_PUBLIC_SECRET_URL_KEY}`
-        );
-      } else {
-        toast.error(res?.message || "Something went wrong!");
-      }
-
-      setIsLoading(false);
-    } catch (error: any) {
-      toast.error(
-        error?.data?.errorSources[0].message || "Something went wrong!"
-      );
-
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className="py-12 lg:py-16">
-      <SectionTitle text="কুরআন শিক্ষা কোর্স" />
+    <div className="pb-12 lg:pb-16">
+      <div
+        className="relative flex items-center justify-center h-[220px] md:h-[300px] lg:h-[450px] w-full overflow-hidden rounded-none bg-cover bg-center "
+        style={{
+          backgroundImage: `url(${IMAGES.course.QuranBasicPageBanner.src})`,
+        }}
+      >
+        {/* Black overlay */}
+        {/* <div className="absolute inset-0 bg-black opacity-60"></div> */}
 
-      <div className="max-w-[980px] mx-auto my-8 px-4">
-        <KAForm
-          onSubmit={handleQuranLCBasicRegistration}
-          defaultValues={quranLCBasicRegistrationDefaultValues}
-          schema={quranLCBasicRegistrationSchema}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* name */}
-            <div>
-              <label
-                htmlFor="userName"
-                className="block text-start font-medium mb-[2px]"
-              >
-                আপনার নাম <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KAInput name="userName" placeholder="" />
-            </div>
+        {/* Content */}
+        {/* <div className="relative z-10 text-center text-white px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide mb-2">
+            কুরআন শিক্ষা কোর্স
+          </h2>
+          <p className="text-sm md:text-base text-gray-200">
+            হরফ থেকে শুরু করে সঠিকভাবে কুরআন পাঠ শেখার পূর্ণাঙ্গ কোর্স
+          </p>
+        </div> */}
+      </div>
 
-            {/* gander */}
-            <div>
-              <label
-                htmlFor="userGender"
-                className="block text-start font-medium mb-[2px]"
-              >
-                জেন্ডার <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KASelect
-                name="userGender"
-                options={[
-                  { value: "male", label: "মেইল (ছেলে)" },
-                  { value: "female", label: "ফিমেইল (মেয়ে)" },
-                ]}
-                placeholder=""
-              />
-            </div>
-
-            {/* date of birth */}
-            <div>
-              <label
-                htmlFor="dateOfBirth"
-                className="block text-start font-medium mb-[2px]"
-              >
-                জন্ম তারিখ <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KADatePicker
-                placeholder="Pick Your Birthday"
-                name="dateOfBirth"
-                className="rounded"
-              />
-            </div>
-
-            {/* profession */}
-            <div>
-              <label
-                htmlFor="profession"
-                className="block text-start font-medium mb-[2px]"
-              >
-                পেশা <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KAInput name="profession" placeholder="" />
-            </div>
-
-            {/* address */}
-            <div>
-              <label
-                htmlFor="address"
-                className="block text-start font-medium mb-[2px]"
-              >
-                ঠিকানা <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KAInput name="address" placeholder="" />
-            </div>
-
-            {/*"phoneNumber */}
-            <div>
-              <label
-                htmlFor="phoneNumber"
-                className="block text-start font-medium mb-[2px]"
-              >
-                মেবাইল নাম্বার{" "}
-                <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KAInput name="phoneNumber" type="number" placeholder="" />
-            </div>
-
-            {/* WhatsAppNumber */}
-            <div>
-              <label
-                htmlFor="whatsAppNumber"
-                className="block text-start font-medium mb-[2px]"
-              >
-                হোয়াটসঅ্যাপ নাম্বার{" "}
-                <span className="text-red-600 font-semibold">*</span>
-              </label>
-              <KAInput name="whatsAppNumber" type="number" placeholder="" />
-            </div>
-          </div>
-
-          {/* submit button */}
-          <div className="mt-8 flex justify-center items-center">
-            <Button
-              className="h-11 cursor-pointer"
-              type="submit"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <span className="space-x-2 flex items-center">
-                  <LoaderSpinner /> <span>Processing...</span>
-                </span>
-              ) : (
-                "Registration"
-              )}
-            </Button>
-          </div>
-        </KAForm>
+      <div className="w-[90%] max-w-[980px] mx-auto pt-14">
+        <QuranLCBasicRegistrationForm />
       </div>
     </div>
   );

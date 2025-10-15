@@ -33,7 +33,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <Link
-                href="https://www.facebook.com/share/19q5AmmnrK"
+                href="https://www.facebook.com/share/1FAnmnz2yC"
                 target="_blank"
                 className="text-gray-300 hover:text-white"
               >
@@ -41,7 +41,7 @@ export default function Footer() {
                 <span className="sr-only">Facebook</span>
               </Link>
               <Link
-                href="https://www.youtube.com/@KaamilAcademyofficial"
+                href="https://youtube.com/@kaamilacademyofficial?si=guAI4hLphkj-9kq4"
                 target="_blank"
                 className="text-gray-300 hover:text-white"
               >
@@ -49,7 +49,7 @@ export default function Footer() {
                 <span className="sr-only">YouTube</span>
               </Link>
               <Link
-                href="#"
+                href="https://www.instagram.com/kaamilacademy?igsh=YmpmMWc3cm42N250"
                 target="_blank"
                 className="text-gray-300 hover:text-white"
               >

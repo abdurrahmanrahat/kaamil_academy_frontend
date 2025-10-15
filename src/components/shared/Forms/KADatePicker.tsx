@@ -42,15 +42,15 @@ const KADatePicker = ({
                 sx: {
                   "& .MuiOutlinedInput-root": {
                     paddingY: "2px", // Reduce vertical padding
-                    borderColor: "#000", // Custom border color
+                    borderColor: "#CCE5CC", // Custom border color
                     "& fieldset": {
-                      borderColor: "#000", // Normal border
+                      borderColor: "#CCE5CC", // Normal border
                     },
                     "&:hover fieldset": {
-                      borderColor: "#000000", // Prevent changing on hover
+                      borderColor: "#CCE5CC", // Prevent changing on hover
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#000000", // Focus border color
+                      borderColor: "#CCE5CC", // Focus border color
                     },
                   },
                   "& input": {

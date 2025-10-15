@@ -42,7 +42,7 @@ export default function TextEditor({ content, onChange }: TTextEditorProps) {
     editorProps: {
       attributes: {
         class:
-          "min-h-[180px] max-h-[240] overflow-auto border rounded-md focus:outline-none py-2 px-3",
+          "min-h-[180px] max-h-[240] overflow-auto border border-primary/20 rounded-md focus:outline-none py-2 px-3",
       },
     },
     onUpdate: ({ editor }) => {

@@ -62,7 +62,7 @@ const KAMultiSelectWithExtra = ({
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <div
-                className={`flex flex-wrap gap-2 p-2 min-h-[40px] w-full cursor-pointer focus:outline-none border rounded-md ${className}`}
+                className={`h-11 flex flex-wrap gap-2 p-2 min-h-[40px] w-full cursor-pointer focus:outline-none border border-primary/20 rounded-md ${className}`}
               >
                 {selectedTags.length > 0 ? (
                   selectedTags.map((tag: string) => (
@@ -82,7 +82,7 @@ const KAMultiSelectWithExtra = ({
                     </Badge>
                   ))
                 ) : (
-                  <span className="text-gray-600 text-sm px-2">
+                  <span className="text-gray-600 flex items-center text-sm px-2">
                     Select or add tags...
                   </span>
                 )}

@@ -60,9 +60,7 @@ const SignupForm = () => {
       }
     } catch (error: any) {
       console.log(error);
-      toast.error(
-        error?.data?.errorSources[0].message || "Something went wrong!"
-      );
+      toast.error(error?.message || "Something went wrong!");
 
       setIsLoading(false);
     }

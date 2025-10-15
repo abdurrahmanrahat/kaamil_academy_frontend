@@ -32,9 +32,7 @@ const StatusChangeDropdown = ({
       }
     } catch (error: any) {
       console.error("Error updating status:", error);
-      toast.error(
-        error?.data?.errorSources[0].message || "something went wrong!"
-      );
+      toast.error(error?.message || "something went wrong!");
     }
   };
 

@@ -41,9 +41,7 @@ const GoogleLogin = () => {
       }
     } catch (error: any) {
       console.error("Error requesting Google auth:", error);
-      toast.error(
-        error?.data?.errorSources[0].message || "Google Login Failed!"
-      );
+      toast.error(error?.message || "Google Login Failed!");
     }
   };
 

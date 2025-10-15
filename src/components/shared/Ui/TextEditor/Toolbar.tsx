@@ -36,7 +36,7 @@ export default function ToolBar({ editor }: TToolBarProps) {
   ];
 
   return (
-    <div className="border rounded-md p-1.5 mb-1 bg-slate-50 flex flex-wrap items-center gap-2">
+    <div className="border border-primary/20 rounded-md p-1.5 mb-1 bg-slate-50 flex flex-wrap items-center gap-2">
       {/* Undo & Redo */}
       <div className="flex gap-0 md:gap-1">
         <Toggle size="sm" onClick={() => editor.chain().focus().undo().run()}>
@@ -47,7 +47,7 @@ export default function ToolBar({ editor }: TToolBarProps) {
         </Toggle>
       </div>
 
-      <span className="border-l mx-0 md:mx-2 h-5" />
+      <span className="border-l border-primary/20 mx-0 md:mx-2 h-5" />
 
       <div className="flex gap-0 md:gap-1">
         {/* Bold, Italic, Underline */}
@@ -74,12 +74,12 @@ export default function ToolBar({ editor }: TToolBarProps) {
         </Toggle>
       </div>
 
-      <span className="border-l mx-0 md:mx-2 h-5" />
+      <span className="border-l border-primary/20 mx-0 md:mx-2 h-5" />
 
       {/* Headings & Paragraph Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="focus:right-0">
-          <Button variant="outline">
+          <Button variant="outline" className="border border-primary/20">
             {headingOptions.find((h) =>
               editor.isActive("heading", { level: h.level })
             )?.label || "Normal"}
@@ -107,7 +107,7 @@ export default function ToolBar({ editor }: TToolBarProps) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <span className="border-l mx-0 md:mx-2 h-5" />
+      <span className="border-l border-primary/20 mx-0 md:mx-2 h-5" />
 
       {/* Bullet List & Number List */}
       <div className="flex gap-0 md:gap-1">

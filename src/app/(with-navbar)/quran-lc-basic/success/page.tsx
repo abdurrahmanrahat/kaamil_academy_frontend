@@ -1,10 +1,8 @@
-"use client";
-
 import Container from "@/components/shared/Ui/Container";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { isTokenExpired } from "@/utils/jwt";
 import {
-  AlertTriangle,
   BookOpen,
   Calendar,
   CheckCircle,
@@ -12,49 +10,21 @@ import {
   MessageCircle,
 } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import UnAuthorizedUi from "./_components/UnAuthorizedUi";
 
-const QuranLCBasicRegistrationSuccessPage = () => {
-  const searchParams = useSearchParams();
-  const secret = searchParams.get("secret");
+type TQuranLCBasicSuccessProps = {
+  verificationToken: string;
+};
 
-  // Manual secret key check - hardcoded for simplicity
-  const isValidSecret = secret === process.env.NEXT_PUBLIC_SECRET_URL_KEY;
+const QuranLCBasicRegistrationSuccessPage = async (props: {
+  searchParams: Promise<TQuranLCBasicSuccessProps>;
+}) => {
+  const searchParams = await props?.searchParams;
 
-  if (!isValidSecret) {
-    return (
-      <Container>
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <Card className="w-full max-w-2xl border-red-200 shadow-xl">
-            <CardHeader className="text-center pb-2">
-              <div className="bg-red-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
-                <AlertTriangle className="w-12 h-12 text-red-600" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-red-700">
-                অননুমোদিত অ্যাক্সেস
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-center space-y-6 pt-4">
-              <div className="space-y-3 px-4">
-                <p className="text-lg font-medium text-gray-800">
-                  দুঃখিত, আপনি এই পৃষ্ঠাটি দেখার অনুমতি পাননি।
-                </p>
-                <p className="text-gray-600">
-                  আপনি যদি কুরআন শিক্ষা কোর্সে রেজিস্ট্রেশন করে থাকেন, তাহলে
-                  সঠিক লিংক ব্যবহার করুন অথবা আমাদের সাথে যোগাযোগ করুন।
-                </p>
-              </div>
-              {/* <div className="bg-red-50 border border-red-100 rounded-lg p-4 mx-auto max-w-md">
-                <p className="text-red-600 text-sm">
-                  যদি আপনি মনে করেন এটি একটি ত্রুটি, অনুগ্রহ করে আমাদের সাথে
-                  যোগাযোগ করুন।
-                </p>
-              </div> */}
-            </CardContent>
-          </Card>
-        </div>
-      </Container>
-    );
+  const isExpire = isTokenExpired(searchParams.verificationToken);
+
+  if (!searchParams.verificationToken || isExpire) {
+    return <UnAuthorizedUi />;
   }
 
   return (
@@ -105,7 +75,7 @@ const QuranLCBasicRegistrationSuccessPage = () => {
                     ছেলেদের জন্য নির্ধারিত WhatsApp গ্রুপে যোগ দিন এবং আপডেট পান
                   </p>
                   <Link
-                    href="https://chat.whatsapp.com/L6AwvQkar2yE1wXOjyE1sy"
+                    href="https://chat.whatsapp.com/LTObJmj2frw9C5rkgqRwbP"
                     target="_blank"
                   >
                     <Button className="w-full cursor-pointer">
@@ -130,7 +100,7 @@ const QuranLCBasicRegistrationSuccessPage = () => {
                     পান
                   </p>
                   <Link
-                    href="https://chat.whatsapp.com/I12CDhv0aSwLk6p7qpYVyz"
+                    href="https://chat.whatsapp.com/DDu0ZumSLML0vVmsDApAxy"
                     target="_blank"
                   >
                     <Button className="w-full cursor-pointer">
@@ -147,7 +117,7 @@ const QuranLCBasicRegistrationSuccessPage = () => {
                 <Calendar className="w-5 h-5 text-amber-500 mt-0.5 mr-3 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-amber-700">ক্লাস শুরু</h4>
-                  <p className="text-amber-600">১লা জুলাই থেকে</p>
+                  <p className="text-amber-600">১ নভেম্বর ২০২৫</p>
                 </div>
               </div>
 

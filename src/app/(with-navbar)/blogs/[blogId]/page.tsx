@@ -7,11 +7,43 @@ import Image from "next/image";
 import Link from "next/link";
 import RelatedBlogs from "./_components/RelatedBlogs";
 
+export async function generateMetadata(props: {
+  params: Promise<{ blogId: string }>;
+}) {
+  const params = await props.params;
+  const blogId = params?.blogId;
+
+  const singleBlogResponse = await getSingleBlogFromDB(blogId);
+
+  if (!singleBlogResponse?.success) {
+    return {
+      title: "Blog not found!",
+      description: "This blog does not exist.",
+    };
+  }
+
+  return {
+    title: `${singleBlogResponse?.data?.title} | Kaamil Academy`,
+    description: singleBlogResponse?.data?.description.slice(0, 40),
+    openGraph: {
+      title: singleBlogResponse?.data?.title,
+      description: singleBlogResponse?.data?.description.slice(0, 40),
+      images: [
+        {
+          url: singleBlogResponse?.data?.image,
+          width: 800,
+          height: 600,
+          alt: singleBlogResponse?.data?.title,
+        },
+      ],
+    },
+  };
+}
+
 export default async function BlogDetailPage(props: {
   params: Promise<{ blogId: string }>;
 }) {
   const params = await props.params;
-
   const blogId = params?.blogId;
 
   const singleBlogResponse = await getSingleBlogFromDB(blogId);

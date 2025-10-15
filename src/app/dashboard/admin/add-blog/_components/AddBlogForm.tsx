@@ -78,9 +78,7 @@ const AddBlogForm = ({ userId }: { userId: string }) => {
 
             setIsUploadingBlog(false);
           } catch (error: any) {
-            toast.error(
-              error?.data?.errorSources[0].message || "Something went wrong!"
-            );
+            toast.error(error?.message || "Something went wrong!");
 
             setIsUploadingBlog(false);
           }

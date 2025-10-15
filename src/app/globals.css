@@ -3,12 +3,13 @@
 
 /* off the dark/light mode */
 /* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:not(*));
+
 
 @theme {
   /* make it 100 - 900 variants for primary color */
   --color-primary: #007F00;
   --color-secondary: #006600;
-  /* --color-primary: #008000; */
   /* --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 120rem; */
 
@@ -31,7 +32,6 @@
 @utility bg-gradient-hero {
   background-image: var(--gradient-hero);
 }
-
 
 @utility animate-fade-in {
   animation: fade-in 0.5s ease-out;
@@ -80,31 +80,31 @@ body {
 .MuiPickersTextField-root {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
-  border-color: #000 !important;
+  border-color: #CCE5CC !important;
   margin-top: 2px !important;
 }
 
 .MuiPickersTextField-root fieldset {
-  border-color: #000 !important;
+  border-color: #CCE5CC !important;
 }
 
 .MuiPickersTextField-root:hover fieldset {
-  border-color: #000 !important;
+  border-color: #CCE5CC !important;
 }
 
 .MuiPickersTextField-root.Mui-focused fieldset {
-  border-color: #000 !important;
+  border-color: #CCE5CC !important;
 }
 
 .MuiPickersTextField-root input {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+
 }
 
 .MuiPickersSectionList-root {
-
-  padding-top: 9px !important;
-  padding-bottom: 9px !important;
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
 }
 
 /* For WebKit browsers (Chrome, Safari, newer versions of Opera) */

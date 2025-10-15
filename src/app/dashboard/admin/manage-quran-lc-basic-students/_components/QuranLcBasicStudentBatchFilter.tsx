@@ -22,14 +22,25 @@ const QuranLcBasicStudentBatchFilter = () => {
 
   // Initialize from URL param
   useEffect(() => {
+    // const params = new URLSearchParams(searchParams.toString());
+
     const batchParam = searchParams.get("batch");
 
     if (batchParam) {
       setStudentsBatchNo(batchParam);
     } else {
       setStudentsBatchNo("");
+
+      // set for default batch-03 in the ui
+      // params.set("batch", "batch-03");
+
+      // const newUrl = params.toString() ?
+      //    `/dashboard/admin/manage-quran-lc-basic-students?${params.toString()}`
+      //   : "/dashboard/admin/manage-quran-lc-basic-students";
+
+      // router.replace(newUrl, { scroll: false });
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   // 🔹 Handle batch change
   const handleBatchChange = (currBatch: string) => {

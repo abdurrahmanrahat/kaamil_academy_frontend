@@ -41,7 +41,7 @@ export const adminSidebarItems = [
   },
   {
     text: "Quran LC Basic Students",
-    href: "/dashboard/admin/manage-quran-lc-basic-students",
+    href: "/dashboard/admin/manage-quran-lc-basic-students?batch=batch-03",
     icon: Users,
   },
   { text: "Manage Users", href: "/dashboard/admin/manage-users", icon: Users },

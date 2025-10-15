@@ -27,7 +27,7 @@ const Navbar = () => {
   const logoutUser = useLogoutUser();
 
   const isAdmin = user?.role === "admin";
-  const isStudent = user?.role === "user";
+  // const isStudent = user?.role === "user";
 
   // logout user
   const handleLogout = async () => {
@@ -111,13 +111,13 @@ const Navbar = () => {
                     </ActiveLink>
                   )}
 
-                  {isStudent && (
+                  {/* {isStudent && (
                     <ActiveLink href={`/dashboard/user`}>
                       <span className="font-medium transition-colors duration-300 hover:text-primary">
                         Dashboard
                       </span>
                     </ActiveLink>
-                  )}
+                  )} */}
                 </>
               )}
             </>
@@ -125,7 +125,6 @@ const Navbar = () => {
 
           {/* login/logout button */}
           <div className="flex items-center gap-4">
-            {/* <ThemeToggle /> */}
             <>
               {user ? (
                 <Button className="cursor-pointer" onClick={handleLogout}>
@@ -148,9 +147,9 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden absolute top-[70px] left-0 w-full z-[999] bg-white border-b border-gray-400"
+              className="lg:hidden absolute top-[64px] left-0 w-full z-[999] bg-white border-y border-primary/20"
             >
-              <div className="w-[90%] mx-auto py-4">
+              <div className="w-[90%] mx-auto py-4 ">
                 <div className="flex flex-col space-y-4">
                   <>
                     {navItems.map((item, index) => (
@@ -180,13 +179,13 @@ const Navbar = () => {
                           </ActiveLink>
                         )}
 
-                        {isStudent && (
+                        {/* {isStudent && (
                           <ActiveLink href={`/dashboard/user`}>
                             <span className="font-medium transition-colors duration-300 hover:text-primary">
                               Dashboard
                             </span>
                           </ActiveLink>
-                        )}
+                        )} */}
                       </>
                     )}
                   </>

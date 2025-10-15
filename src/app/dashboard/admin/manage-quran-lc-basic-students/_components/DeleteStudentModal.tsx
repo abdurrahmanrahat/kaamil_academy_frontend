@@ -32,9 +32,7 @@ const DeleteStudentModal = ({
         toast.error(res?.message || "Something went wrong!");
       }
     } catch (error: any) {
-      toast.error(
-        error?.data?.errorSources[0].message || "Something went wrong!"
-      );
+      toast.error(error?.message || "Something went wrong!");
     }
   };
 

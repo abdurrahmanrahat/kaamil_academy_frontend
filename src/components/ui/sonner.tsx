@@ -1,14 +1,11 @@
 "use client";
 
-import { useTheme } from "@/hooks/useTheme";
 import { Toaster as Sonner } from "sonner";
 
 const Toaster = ({ ...props }) => {
-  const { theme } = useTheme();
-
   return (
     <Sonner
-      theme={theme as "system" | "light" | "dark" | undefined}
+      theme={`light`}
       className="toaster group"
       toastOptions={{
         duration: 3000,

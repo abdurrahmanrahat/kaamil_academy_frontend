@@ -1,6 +1,7 @@
 import { getQuranLCBasicStudentsFromDB } from "@/app/actions/quran-lc-basic";
 import NoDataFound from "@/components/shared/Ui/NoDataFound";
 import NoDataFoundBySearchFilter from "@/components/shared/Ui/NoDataFoundBySearchFilter";
+import KAPagination from "@/components/shared/Ui/Pagination/KAPagination";
 import {
   Table,
   TableBody,
@@ -23,13 +24,24 @@ type TQuranLCBasicStudentParams = {
   batch?: string;
   userGender?: string;
   status?: string;
+  page?: string;
+  limit?: string;
 };
+
+const QURAN_LC_BASIC_STUDENTS_DATA_LIMIT = "100";
 
 const ManageQuranLCBasicStudentPage = async (props: {
   searchParams: Promise<TQuranLCBasicStudentParams>;
 }) => {
   const searchParams = await props?.searchParams;
-  const { searchTerm, batch, userGender, status } = searchParams || {};
+  const {
+    searchTerm,
+    batch,
+    userGender,
+    status,
+    page = "1",
+    limit = QURAN_LC_BASIC_STUDENTS_DATA_LIMIT,
+  } = searchParams || {};
 
   const params: Record<string, string> = {};
 
@@ -45,8 +57,16 @@ const ManageQuranLCBasicStudentPage = async (props: {
   if (status) {
     params.status = status;
   }
+  if (page) {
+    params.page = page;
+  }
+  if (limit) {
+    params.limit = limit;
+  }
 
   const quranLCBasicResponse = await getQuranLCBasicStudentsFromDB(params);
+
+  const totalData = quranLCBasicResponse?.data?.totalCount || 0;
 
   return (
     <div className="py-6 min-h-screen">
@@ -75,7 +95,7 @@ const ManageQuranLCBasicStudentPage = async (props: {
             description="বর্তমানে কোনো ছাত্র জমা নেই। নতুন করে রেজিস্ট্রেশন করলে এখানে দেখতে পারবেন।"
           />
         ) : (
-          <>
+          <div>
             {quranLCBasicResponse?.data.data.length > 0 ? (
               <Table className="border">
                 <TableHeader className="">
@@ -160,7 +180,14 @@ const ManageQuranLCBasicStudentPage = async (props: {
                 description="অন্য কোনো ছাত্র খুঁজে দেখুন অথবা সব ফিল্টার পরিষ্কার করুন"
               />
             )}
-          </>
+
+            <div className="mt-8">
+              <KAPagination
+                totalData={totalData}
+                dataLimit={Number(QURAN_LC_BASIC_STUDENTS_DATA_LIMIT)}
+              />
+            </div>
+          </div>
         )}
       </div>
     </div>

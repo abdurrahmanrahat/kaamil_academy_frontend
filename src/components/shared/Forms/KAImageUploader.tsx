@@ -19,7 +19,7 @@ const KAImageUploader = ({ name, className }: TImageUploaderProps) => {
         name={name}
         render={({ field: { onChange, value, ...fieldProps } }) => (
           <div
-            className={`relative py-[6px] px-3 rounded-md text-[15px] focus:outline-none text-black border ${className}`}
+            className={`relative py-[6px] px-3 rounded-md text-[15px] focus:outline-none text-black border border-primary/20 ${className}`}
           >
             <input
               {...fieldProps}

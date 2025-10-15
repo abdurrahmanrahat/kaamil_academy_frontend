@@ -22,7 +22,7 @@ const KAInput = ({ name, type = "text", placeholder }: TMTInputProps) => {
           <Input
             {...field}
             type={type}
-            className={`h-11 `}
+            className={`h-11 border border-primary/20`}
             placeholder={placeholder ? placeholder : ""}
           />
         )}

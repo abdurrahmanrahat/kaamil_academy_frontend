@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 import { fetchWithAuth } from "./fetchWithAuth";
 
 /* ============================================
-   Get All Blogs
+   Get All Blogs : use here normal fetch, do not need auth token 
 ============================================ */
 export const getAllBlogsFromDB = async (
   params?: Record<string, any>
@@ -16,7 +16,7 @@ export const getAllBlogsFromDB = async (
       ? "?" + new URLSearchParams(params).toString()
       : "";
 
-    const res = await fetchWithAuth(
+    const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs${queryParams}`,
       {
         cache: "force-cache",

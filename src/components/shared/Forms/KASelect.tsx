@@ -34,11 +34,11 @@ const KASelect = ({ name, options, placeholder }: TKASelectProps) => {
         render={({ field }) => (
           <Select value={field.value} onValueChange={field.onChange}>
             <SelectTrigger
-              className={`h-11 w-full cursor-pointer rounded-md border bg-white px-3 py-[21px] text-sm shadow-xs `}
+              className={`h-11 w-full cursor-pointer rounded-md border border-primary/20 px-3 py-[21px] text-sm shadow-xs `}
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="">
               {options.map((option) => (
                 <SelectItem
                   key={option.value}

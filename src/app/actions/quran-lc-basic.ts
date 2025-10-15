@@ -214,3 +214,47 @@ export const deleteQuranLCBasicStudentFromDB = async (
     };
   }
 };
+
+/* ============================================
+  Payment api
+============================================ */
+export const quranLCBasicPaymentAction = async (
+  paymentData: Record<string, any>
+): Promise<TServerResponse> => {
+  try {
+    const res = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKED_URL}/quran-lc-basic-students/payment`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(paymentData),
+        cache: "no-store",
+      }
+    );
+
+    // if (!res.ok) {
+    //   return {
+    //     success: false,
+    //     data: null,
+    //     message: "Failed to process Quran LC Basic payment",
+    //   };
+    // }
+
+    const data = await res.json();
+
+    revalidateTag(tagLists.QURAN_LC_BASIC);
+
+    return {
+      success: data?.success,
+      data: data?.data || null,
+      message: data?.message || "Payment processed successfully",
+    };
+  } catch (error: any) {
+    console.error("Error processing Quran LC Basic payment:", error);
+    return {
+      success: false,
+      data: null,
+      message: "Network or server error while processing payment",
+    };
+  }
+};
