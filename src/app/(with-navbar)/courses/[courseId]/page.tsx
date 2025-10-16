@@ -1,4 +1,5 @@
 import { IMAGES } from "@/image-data";
+import Testimonials from "../../_components/Testimonials/Testimonials";
 import CourseHero from "./_components/CourseHero";
 import CourseOverview from "./_components/CourseOverview";
 import ImportantDates from "./_components/ImportantDates";
@@ -33,6 +34,7 @@ const CourseDetailsPage = () => {
       <WhoCanJoin />
       <ImportantDates />
       <RegistrationCTA />
+      <Testimonials />
     </div>
   );
 };

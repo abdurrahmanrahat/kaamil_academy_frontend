@@ -2,11 +2,23 @@ import Container from "@/components/shared/Ui/Container";
 import SectionTitle from "@/components/shared/Ui/SectionTitle";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock, FileText, Laptop, Type, Users, Video } from "lucide-react";
+import {
+  CircleDollarSign,
+  FileText,
+  Laptop,
+  Type,
+  Users,
+  Video,
+} from "lucide-react";
 import Image from "next/image";
 
 const CourseOverview = () => {
   const courseDetails = [
+    {
+      icon: CircleDollarSign,
+      title: "কোর্স ফি",
+      value: "সম্পূর্ণ ফ্রি",
+    },
     {
       icon: Users,
       title: "উন্মুক্ত সকলের জন্য",
@@ -21,11 +33,6 @@ const CourseOverview = () => {
       icon: FileText,
       title: "মোট ক্লাস",
       value: "২০টি",
-    },
-    {
-      icon: Clock,
-      title: "কোর্সের মেয়াদ",
-      value: "দেড় মাস",
     },
     {
       icon: Laptop,
