@@ -11,7 +11,9 @@ type TItemProps = {
 
 export const SidebarItem = ({ item }: { item: TItemProps }) => {
   const pathname = usePathname();
-  const isActive = pathname === item.href;
+
+  const cleanHref = item.href.split("?")[0];
+  const isActive = pathname === cleanHref;
 
   return (
     <Link

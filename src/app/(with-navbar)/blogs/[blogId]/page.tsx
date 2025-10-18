@@ -1,7 +1,9 @@
-import { getSingleBlogFromDB } from "@/app/actions/blog";
+import { getAllBlogsFromDB, getSingleBlogFromDB } from "@/app/actions/blog";
 import Container from "@/components/shared/Ui/Container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TBlog } from "@/types";
+import { stripHtml, truncateText } from "@/utils/conversion";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,12 +24,17 @@ export async function generateMetadata(props: {
     };
   }
 
+  const plainDescription = truncateText(
+    stripHtml(singleBlogResponse?.data?.description),
+    80
+  );
+
   return {
     title: `${singleBlogResponse?.data?.title} | Kaamil Academy`,
-    description: singleBlogResponse?.data?.description.slice(0, 40),
+    description: plainDescription,
     openGraph: {
       title: singleBlogResponse?.data?.title,
-      description: singleBlogResponse?.data?.description.slice(0, 40),
+      description: plainDescription,
       images: [
         {
           url: singleBlogResponse?.data?.image,
@@ -148,4 +155,17 @@ export default async function BlogDetailPage(props: {
       </div>
     </Container>
   );
+}
+
+export async function generateStaticParams() {
+  try {
+    const blogsResponse = await getAllBlogsFromDB();
+    return (
+      blogsResponse?.data?.data?.map((blog: TBlog) => ({
+        blogId: blog._id.toString(),
+      })) ?? []
+    );
+  } catch {
+    return [];
+  }
 }
