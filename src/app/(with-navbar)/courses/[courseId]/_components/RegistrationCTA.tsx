@@ -31,7 +31,7 @@ const RegistrationCTA = () => {
 
               <div className="mb-6">
                 <h4 className="flex items-center justify-center gap-2">
-                  <span className="text-4xl font-bold">৳৩৫০</span>{" "}
+                  <span className="text-4xl font-bold">৳২৫০</span>{" "}
                   <span className="text-emerald-100 text-sm">
                     (রেজিস্ট্রেশন ফি)
                   </span>
@@ -41,10 +41,10 @@ const RegistrationCTA = () => {
               <Link href="/quran-lc-basic/registration">
                 <Button
                   size="lg"
-                  className="bg-white text-primary hover:bg-white/90 font-bold text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 group"
+                  className="bg-white text-primary hover:bg-white/90 font-bold text-base px-10 py-6 rounded-full shadow-lg hover:scale-105 transition-all duration-300 group"
                 >
                   এখনই রেজিস্ট্রেশন করুন
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
 

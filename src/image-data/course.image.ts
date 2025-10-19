@@ -1,4 +1,6 @@
-import CourseCardBanner from "../../public/images/course/course-card-banner.png";
-import QuranBasicPageBanner from "../../public/images/course/quran-basic-page-banner.jpg";
+import QuranBasicPageBanner from "../../public/images/course/quran-basic-page-banner.png";
 
-export const CourseImages = { CourseCardBanner, QuranBasicPageBanner };
+export const CourseImages = {
+  CourseCardBanner: QuranBasicPageBanner,
+  QuranBasicPageBanner,
+};

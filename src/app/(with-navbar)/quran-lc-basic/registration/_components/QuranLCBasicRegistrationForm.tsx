@@ -45,7 +45,10 @@ const QuranLCBasicRegistrationForm = () => {
     setIsLoading(true);
 
     try {
-      const studentData = { ...values, batch: "batch-03" };
+      const studentData = {
+        ...values,
+        batch: values?.userGender === "male" ? "batch-04" : "batch-03",
+      };
       const res = await addQuranLCBasicStudentToDB(studentData);
 
       if (res.success) {

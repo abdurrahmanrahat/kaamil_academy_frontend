@@ -21,12 +21,12 @@ export default function CourseCard() {
 
           {/* Price Badge */}
           <Badge className="absolute top-3 right-3 bg-[#007F00] text-white text-xs px-3 py-1 rounded-full shadow-md">
-            ৳৩৫০
+            ৳২৫০
           </Badge>
 
           {/* Batch Tag */}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/90 text-[#007F00] text-xs font-semibold px-3 py-1 rounded-full shadow">
-            Batch – 03
+            Batch – 3 & 4
           </div>
         </div>
 

@@ -44,10 +44,21 @@ const CourseHero = () => {
         </div>
 
         {/* Batch info card */}
-        <div className="mt-10 max-w-lg mx-auto bg-white/10 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 text-white shadow-lg">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3">ব্যাচ–০৩</h3>
-          <p className="text-lg mb-1">বাংলাদেশ সময় রাত ৯টা থেকে</p>
-          <p className="text-base opacity-90">শনিবার, সোমবার ও বুধবার</p>
+        <div className="mt-10 max-w-2xl mx-auto flex flex-col md:flex-row gap-4">
+          <div className="w-full bg-white/10 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 text-white shadow-lg">
+            <h3 className="text-xl md:text-2xl font-bold mb-3">
+              ব্যাচ–০৩ (মেয়ে)
+            </h3>
+            <p className="text-lg mb-1">বাংলাদেশ সময় রাত ৮.৩০টা থেকে</p>
+            <p className="text-base opacity-90">শনিবার, সোমবার ও বুধবার</p>
+          </div>
+          <div className="w-full bg-white/10 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 text-white shadow-lg">
+            <h3 className="text-xl md:text-2xl font-bold mb-3">
+              ব্যাচ–০৪ (ছেলে)
+            </h3>
+            <p className="text-lg mb-1">বাংলাদেশ সময় রাত ১০টা থেকে</p>
+            <p className="text-base opacity-90">শনিবার, সোমবার ও বুধবার</p>
+          </div>
         </div>
       </Container>
     </section>
