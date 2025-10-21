@@ -106,11 +106,15 @@ const ManageQuranLCBasicStudentPage = async (props: {
                     <TableHead className="text-base text-white font-medium py-3">
                       Name
                     </TableHead>
-                    <TableHead className="text-base text-white font-medium py-3">
-                      Phone Number
-                    </TableHead>
+
                     <TableHead className="text-base text-white font-medium py-3">
                       Gander
+                    </TableHead>
+                    <TableHead className="text-base text-white font-medium py-3">
+                      Pay. Method
+                    </TableHead>
+                    <TableHead className="text-base text-white font-medium py-3">
+                      Reg. Fee No.
                     </TableHead>
                     <TableHead className="text-base text-white font-medium py-3">
                       Batch
@@ -148,8 +152,13 @@ const ManageQuranLCBasicStudentPage = async (props: {
                         <TableCell className="font-medium">
                           {user.userName}
                         </TableCell>
-                        <TableCell>{user.phoneNumber}</TableCell>
                         <TableCell>{user.userGender}</TableCell>
+                        <TableCell>
+                          {user.paymentMethod ? user.paymentMethod : "N/A"}
+                        </TableCell>
+                        <TableCell>
+                          {user.RegFeeNumber ? user.RegFeeNumber : "N/A"}
+                        </TableCell>
                         <TableCell>{user.batch}</TableCell>
                         <TableCell className="capitalize">
                           {user.status}

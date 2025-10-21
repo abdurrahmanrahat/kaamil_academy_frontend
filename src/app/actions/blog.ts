@@ -41,13 +41,13 @@ export const getAllBlogsFromDB = async (
 };
 
 /* ============================================
-   Get Single Blog
+   Get Single Blog: use normal fetch
 ============================================ */
 export const getSingleBlogFromDB = async (
   blogId: string
 ): Promise<TServerResponse> => {
   try {
-    const res = await fetchWithAuth(
+    const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKED_URL}/blogs/${blogId}`,
       {
         cache: "force-cache",

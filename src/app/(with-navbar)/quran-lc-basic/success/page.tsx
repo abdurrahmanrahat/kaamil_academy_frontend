@@ -1,7 +1,6 @@
 import Container from "@/components/shared/Ui/Container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { isTokenExpired } from "@/utils/jwt";
 import {
   BookOpen,
   Calendar,
@@ -21,9 +20,12 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
 }) => {
   const searchParams = await props?.searchParams;
 
-  const isExpire = isTokenExpired(searchParams.verificationToken);
+  // const isExpire = isTokenExpired(searchParams.verificationToken);
 
-  if (!searchParams.verificationToken || isExpire) {
+  if (
+    !searchParams.verificationToken ||
+    searchParams.verificationToken !== process.env.NEXT_PUBLIC_JWT_SECRET
+  ) {
     return <UnAuthorizedUi />;
   }
 

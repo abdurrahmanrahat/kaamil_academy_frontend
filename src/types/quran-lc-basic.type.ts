@@ -8,6 +8,8 @@ export type TQuranLCBasic = {
   phoneNumber: string;
   whatsAppNumber: string;
   batch: string;
+  paymentMethod?: string;
+  RegFeeNumber?: string;
   status: "pending" | "completed";
   createdAt: string; // or Date
   updatedAt: string; // or Date

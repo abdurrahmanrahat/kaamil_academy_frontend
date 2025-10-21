@@ -7,11 +7,11 @@ import KAInput from "@/components/shared/Forms/KAInput";
 import KASelect from "@/components/shared/Forms/KASelect";
 import { LoaderSpinner } from "@/components/shared/Ui/LoaderSpinner";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import QuranLCBasicPaymentModal from "./QuranLCBasicPaymentModal";
 
 const quranLCBasicRegistrationSchema = z.object({
   userName: z.string().min(1, "আপনার নাম আবশ্যক"),
@@ -23,6 +23,10 @@ const quranLCBasicRegistrationSchema = z.object({
   address: z.string().min(1, "ঠিকানা আবশ্যক"),
   phoneNumber: z.string().min(11, "সঠিক মোবাইল নাম্বার দিন"),
   whatsAppNumber: z.string().min(11, "সঠিক হোয়াটসঅ্যাপ নাম্বার দিন"),
+  paymentMethod: z.enum(["bkash", "nagad", "rocket"], {
+    errorMap: () => ({ message: "পেমেন্ট মাধ্যম নির্বাচন করুন" }),
+  }),
+  RegFeeNumber: z.string().min(6, "কমপক্ষে ৬ ডিজিট দিন"),
 });
 
 const quranLCBasicRegistrationDefaultValues = {
@@ -33,13 +37,17 @@ const quranLCBasicRegistrationDefaultValues = {
   address: "",
   phoneNumber: "",
   whatsAppNumber: "",
+  paymentMethod: "",
+  RegFeeNumber: "",
 };
 
 const QuranLCBasicRegistrationForm = () => {
-  const [showQuranLCBasicPaymentModal, setShowQuranLCBasicPaymentModal] =
-    useState(false);
-  const [studentRegisterId, setStudentRegisterId] = useState("");
+  // const [showQuranLCBasicPaymentModal, setShowQuranLCBasicPaymentModal] =
+  //   useState(false);
+  // const [studentRegisterId, setStudentRegisterId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleQuranLCBasicRegistration = async (values: FieldValues) => {
     setIsLoading(true);
@@ -51,11 +59,17 @@ const QuranLCBasicRegistrationForm = () => {
       };
       const res = await addQuranLCBasicStudentToDB(studentData);
 
+      console.log("res", res);
+
       if (res.success) {
         toast.success(res.message);
 
-        setStudentRegisterId(res?.data?._id);
-        setShowQuranLCBasicPaymentModal(true);
+        router.push(
+          `/quran-lc-basic/success?verificationToken=${process.env.NEXT_PUBLIC_JWT_SECRET}`
+        );
+
+        // setStudentRegisterId(res?.data?._id);
+        // setShowQuranLCBasicPaymentModal(true);
       } else {
         toast.error(res?.message || "Something went wrong!");
       }
@@ -166,6 +180,56 @@ const QuranLCBasicRegistrationForm = () => {
           </div>
         </div>
 
+        <div className="mt-14">
+          <h2 className="md:text-lg font-medium text-center mb-8">
+            আপনি এই{" "}
+            <span className="italic text-primary font-semibold">
+              01788880835
+            </span>{" "}
+            নাম্বারে রেজিষ্ট্রেশন ফি{" "}
+            <span className="italic text-primary font-semibold">২৫০</span> টাকা
+            বিকাশ/নগদ/রকেট থেকে সেন্ড মানি করুন
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+            {/* gander */}
+            <div>
+              <label
+                htmlFor="paymentMethod"
+                className="block text-start font-medium mb-[2px]"
+              >
+                আপনি কোন মাধ্যমে ফি পাঠিয়েছেন?{" "}
+                <span className="text-red-600 font-semibold">*</span>
+              </label>
+              <KASelect
+                name="paymentMethod"
+                options={[
+                  { value: "bkash", label: "বিকাশ" },
+                  { value: "nagad", label: "নগদ" },
+                  { value: "rocket", label: "রকেট" },
+                ]}
+                placeholder="সিলেক্ট করুন"
+              />
+            </div>
+
+            {/*"phoneNumber */}
+            <div>
+              <label
+                htmlFor="RegFeeNumber"
+                className="block text-start font-medium mb-[2px]"
+              >
+                যে নাম্বার থেকে রেজি. ফি পাঠিয়েছেন সেই নাম্বার টি লিখুন{" "}
+                <span className="text-red-600 font-semibold">*</span>
+              </label>
+              <KAInput
+                name="RegFeeNumber"
+                //   type="number"
+                placeholder=""
+              />
+            </div>
+          </div>
+        </div>
+
         {/* submit button */}
         <div className="mt-8 flex justify-center items-center">
           <Button
@@ -184,11 +248,11 @@ const QuranLCBasicRegistrationForm = () => {
         </div>
       </KAForm>
 
-      <QuranLCBasicPaymentModal
+      {/* <QuranLCBasicPaymentModal
         showQuranLCBasicPaymentModal={showQuranLCBasicPaymentModal}
         setShowQuranLCBasicPaymentModal={setShowQuranLCBasicPaymentModal}
         studentRegisterId={studentRegisterId}
-      />
+      /> */}
     </div>
   );
 };
