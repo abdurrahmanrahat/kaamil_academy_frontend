@@ -9,7 +9,7 @@ import { fetchWithAuth } from "./fetchWithAuth";
    Get All Blogs : use here normal fetch, do not need auth token 
 ============================================ */
 export const getAllBlogsFromDB = async (
-  params?: Record<string, any>
+  params?: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const queryParams = params
@@ -21,7 +21,7 @@ export const getAllBlogsFromDB = async (
       {
         cache: "force-cache",
         next: { tags: [tagLists.BLOG] },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -44,7 +44,7 @@ export const getAllBlogsFromDB = async (
    Get Single Blog: use normal fetch
 ============================================ */
 export const getSingleBlogFromDB = async (
-  blogId: string
+  blogId: string,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetch(
@@ -52,7 +52,7 @@ export const getSingleBlogFromDB = async (
       {
         cache: "force-cache",
         next: { tags: [tagLists.BLOG] },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -75,7 +75,7 @@ export const getSingleBlogFromDB = async (
   Add Blog
 ============================================ */
 export const addBlogToDB = async (
-  blogData: Record<string, any>
+  blogData: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -85,7 +85,7 @@ export const addBlogToDB = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(blogData),
         cache: "no-store",
-      }
+      },
     );
 
     // if (!res.ok) {
@@ -93,7 +93,7 @@ export const addBlogToDB = async (
     // }
 
     const data = await res.json();
-    revalidateTag(tagLists.BLOG);
+    revalidateTag(tagLists.BLOG, "");
 
     return {
       success: data?.success,
@@ -111,7 +111,7 @@ export const addBlogToDB = async (
 ============================================ */
 export const updateBlogInDB = async (
   blogId: string,
-  updatedData: Record<string, any>
+  updatedData: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -121,7 +121,7 @@ export const updateBlogInDB = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
         cache: "no-store",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -129,7 +129,7 @@ export const updateBlogInDB = async (
     }
 
     const data = await res.json();
-    revalidateTag(tagLists.BLOG);
+    revalidateTag(tagLists.BLOG, "");
 
     return {
       success: data?.success ?? true,
@@ -146,7 +146,7 @@ export const updateBlogInDB = async (
   Delete Blog
 ============================================ */
 export const deleteBlogFromDB = async (
-  blogId: string
+  blogId: string,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -154,7 +154,7 @@ export const deleteBlogFromDB = async (
       {
         method: "DELETE",
         cache: "no-store",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -162,7 +162,7 @@ export const deleteBlogFromDB = async (
     }
 
     const data = await res.json();
-    revalidateTag(tagLists.BLOG);
+    revalidateTag(tagLists.BLOG, "");
 
     return {
       success: data?.success ?? true,

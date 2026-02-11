@@ -9,7 +9,7 @@ import { fetchWithAuth } from "./fetchWithAuth";
    Get All Students
 ============================================ */
 export const getQuranLCBasicStudentsFromDB = async (
-  params?: Record<string, any>
+  params?: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const queryParams = params
@@ -21,7 +21,7 @@ export const getQuranLCBasicStudentsFromDB = async (
       {
         cache: "force-cache",
         next: { tags: [tagLists.QURAN_LC_BASIC] },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -52,7 +52,7 @@ export const getQuranLCBasicStudentsFromDB = async (
   Get Single Student
 ============================================ */
 export const getSingleQuranLCBasicStudentFromDB = async (
-  studentId: string
+  studentId: string,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -60,7 +60,7 @@ export const getSingleQuranLCBasicStudentFromDB = async (
       {
         cache: "force-cache",
         next: { tags: [tagLists.QURAN_LC_BASIC] },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -91,7 +91,7 @@ export const getSingleQuranLCBasicStudentFromDB = async (
   Add New Student
 ============================================ */
 export const addQuranLCBasicStudentToDB = async (
-  studentData: Record<string, any>
+  studentData: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -101,7 +101,7 @@ export const addQuranLCBasicStudentToDB = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(studentData),
         cache: "no-store",
-      }
+      },
     );
 
     // if (!res.ok) {
@@ -113,7 +113,7 @@ export const addQuranLCBasicStudentToDB = async (
     // }
 
     const data = await res.json();
-    revalidateTag(tagLists.QURAN_LC_BASIC);
+    revalidateTag(tagLists.QURAN_LC_BASIC, "");
 
     return {
       success: data?.success,
@@ -135,7 +135,7 @@ export const addQuranLCBasicStudentToDB = async (
 ============================================ */
 export const updateQuranLCBasicStudentInDB = async (
   studentId: string,
-  updatedData: Record<string, any>
+  updatedData: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -145,7 +145,7 @@ export const updateQuranLCBasicStudentInDB = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
         cache: "no-store",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -157,7 +157,7 @@ export const updateQuranLCBasicStudentInDB = async (
     }
 
     const data = await res.json();
-    revalidateTag(tagLists.QURAN_LC_BASIC);
+    revalidateTag(tagLists.QURAN_LC_BASIC, "");
 
     return {
       success: data?.success ?? true,
@@ -178,7 +178,7 @@ export const updateQuranLCBasicStudentInDB = async (
   Delete Student
 ============================================ */
 export const deleteQuranLCBasicStudentFromDB = async (
-  studentId: string
+  studentId: string,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -186,7 +186,7 @@ export const deleteQuranLCBasicStudentFromDB = async (
       {
         method: "DELETE",
         cache: "no-store",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -198,7 +198,7 @@ export const deleteQuranLCBasicStudentFromDB = async (
     }
 
     const data = await res.json();
-    revalidateTag(tagLists.QURAN_LC_BASIC);
+    revalidateTag(tagLists.QURAN_LC_BASIC, "");
 
     return {
       success: data?.success ?? true,
@@ -219,7 +219,7 @@ export const deleteQuranLCBasicStudentFromDB = async (
   Payment api
 ============================================ */
 export const quranLCBasicPaymentAction = async (
-  paymentData: Record<string, any>
+  paymentData: Record<string, any>,
 ): Promise<TServerResponse> => {
   try {
     const res = await fetchWithAuth(
@@ -229,7 +229,7 @@ export const quranLCBasicPaymentAction = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentData),
         cache: "no-store",
-      }
+      },
     );
 
     // if (!res.ok) {
@@ -242,7 +242,7 @@ export const quranLCBasicPaymentAction = async (
 
     const data = await res.json();
 
-    revalidateTag(tagLists.QURAN_LC_BASIC);
+    revalidateTag(tagLists.QURAN_LC_BASIC, "");
 
     return {
       success: data?.success,
