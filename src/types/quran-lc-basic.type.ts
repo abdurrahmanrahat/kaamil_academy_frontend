@@ -10,6 +10,7 @@ export type TQuranLCBasic = {
   batch: string;
   paymentMethod?: string;
   RegFeeNumber?: string;
+  reference?: string;
   status: "pending" | "completed";
   createdAt: string; // or Date
   updatedAt: string; // or Date

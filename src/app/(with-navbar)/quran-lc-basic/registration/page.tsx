@@ -1,4 +1,3 @@
-// import BannerImage from "@/asserts/course/quran-basic-page-banner.jpg";
 import { IMAGES } from "@/image-data";
 import { Metadata } from "next";
 import QuranLCBasicRegistrationForm from "./_components/QuranLCBasicRegistrationForm";
@@ -8,7 +7,11 @@ export const metadata: Metadata = {
   description: "We provide Quran learning opportunities for general students",
 };
 
-const QuranLCBasicRegistration = () => {
+const QuranLCBasicRegistrationPage = async (props: {
+  searchParams: Promise<{ reference: string }>;
+}) => {
+  const searchParams = await props.searchParams;
+
   return (
     <div className="pb-12 lg:pb-16">
       <div
@@ -32,10 +35,10 @@ const QuranLCBasicRegistration = () => {
       </div>
 
       <div className="w-[90%] max-w-[980px] mx-auto pt-14">
-        <QuranLCBasicRegistrationForm />
+        <QuranLCBasicRegistrationForm reference={searchParams?.reference} />
       </div>
     </div>
   );
 };
 
-export default QuranLCBasicRegistration;
+export default QuranLCBasicRegistrationPage;

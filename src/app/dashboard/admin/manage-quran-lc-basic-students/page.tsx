@@ -123,6 +123,9 @@ const ManageQuranLCBasicStudentPage = async (props: {
                       Status
                     </TableHead>
                     <TableHead className="text-base text-white font-medium py-3">
+                      Reference
+                    </TableHead>
+                    <TableHead className="text-base text-white font-medium py-3">
                       Info
                     </TableHead>
                     <TableHead className="text-base text-white font-medium py-3">
@@ -162,6 +165,9 @@ const ManageQuranLCBasicStudentPage = async (props: {
                         <TableCell>{user.batch}</TableCell>
                         <TableCell className="capitalize">
                           {user.status}
+                        </TableCell>
+                        <TableCell>
+                          {user.reference ? user.reference : "N/A"}
                         </TableCell>
                         <TableCell>
                           <StudentDetailsModal student={user} />

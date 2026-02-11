@@ -31,7 +31,7 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
 
   return (
     <Container>
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center mt-4 md:p-4">
         <Card className="w-full max-w-2xl border-green-200 shadow-cardLightShadow overflow-hidden p-0 m-0">
           {/* Success Banner */}
           <div className="bg-green-600 text-white py-6 px-4 md:px-8 text-center relative">
@@ -77,7 +77,7 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
                     ছেলেদের জন্য নির্ধারিত WhatsApp গ্রুপে যোগ দিন এবং আপডেট পান
                   </p>
                   <Link
-                    href="https://chat.whatsapp.com/LTObJmj2frw9C5rkgqRwbP"
+                    href="https://chat.whatsapp.com/GCbtsBbuyKRFQWi8h30VtQ?mode=gi_c"
                     target="_blank"
                   >
                     <Button className="w-full cursor-pointer">
@@ -102,7 +102,7 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
                     পান
                   </p>
                   <Link
-                    href="https://chat.whatsapp.com/DDu0ZumSLML0vVmsDApAxy"
+                    href="https://chat.whatsapp.com/BmpTKQ8qnJhHeQOfYWcEKV?mode=gi_c"
                     target="_blank"
                   >
                     <Button className="w-full cursor-pointer">
@@ -119,7 +119,7 @@ const QuranLCBasicRegistrationSuccessPage = async (props: {
                 <Calendar className="w-5 h-5 text-amber-500 mt-0.5 mr-3 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-amber-700">ক্লাস শুরু</h4>
-                  <p className="text-amber-600">১ নভেম্বর ২০২৫</p>
+                  <p className="text-amber-600">২২ই ফেব্রুয়ারি ২০২৬</p>
                 </div>
               </div>
 

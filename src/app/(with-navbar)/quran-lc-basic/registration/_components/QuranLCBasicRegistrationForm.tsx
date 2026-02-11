@@ -41,7 +41,7 @@ const quranLCBasicRegistrationDefaultValues = {
   RegFeeNumber: "",
 };
 
-const QuranLCBasicRegistrationForm = () => {
+const QuranLCBasicRegistrationForm = ({ reference }: { reference: string }) => {
   // const [showQuranLCBasicPaymentModal, setShowQuranLCBasicPaymentModal] =
   //   useState(false);
   // const [studentRegisterId, setStudentRegisterId] = useState("");
@@ -55,7 +55,8 @@ const QuranLCBasicRegistrationForm = () => {
     try {
       const studentData = {
         ...values,
-        batch: values?.userGender === "male" ? "batch-04" : "batch-03",
+        batch: values?.userGender === "male" ? "batch-06" : "batch-05",
+        ...(reference && { reference }),
       };
       const res = await addQuranLCBasicStudentToDB(studentData);
 
@@ -65,7 +66,7 @@ const QuranLCBasicRegistrationForm = () => {
         toast.success(res.message);
 
         router.push(
-          `/quran-lc-basic/success?verificationToken=${process.env.NEXT_PUBLIC_JWT_SECRET}`
+          `/quran-lc-basic/success?verificationToken=${process.env.NEXT_PUBLIC_JWT_SECRET}`,
         );
 
         // setStudentRegisterId(res?.data?._id);

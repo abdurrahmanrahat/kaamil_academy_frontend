@@ -26,7 +26,7 @@ export default function CourseCard() {
 
           {/* Batch Tag */}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/90 text-[#007F00] text-xs font-semibold px-3 py-1 rounded-full shadow">
-            Batch – 3 & 4
+            Batch – 5 & 6
           </div>
         </div>
 

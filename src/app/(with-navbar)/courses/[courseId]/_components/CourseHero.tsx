@@ -47,17 +47,17 @@ const CourseHero = () => {
         <div className="mt-10 max-w-2xl mx-auto flex flex-col md:flex-row gap-4">
           <div className="w-full bg-white/10 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 text-white shadow-lg">
             <h3 className="text-xl md:text-2xl font-bold mb-3">
-              ব্যাচ–০৩ (মেয়ে)
+              ব্যাচ–০৫ (মেয়ে)
             </h3>
-            <p className="text-lg mb-1">বাংলাদেশ সময় রাত ৮.৩০টা থেকে</p>
-            <p className="text-base opacity-90">শনিবার, সোমবার ও বুধবার</p>
+            <p className="text-lg mb-1">বাংলাদেশ সময় রাত ১১.৩০টা থেকে</p>
+            <p className="text-base opacity-90">রবি, মঙ্গল, বৃহ: ও জুম্মাবার</p>
           </div>
           <div className="w-full bg-white/10 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 text-white shadow-lg">
             <h3 className="text-xl md:text-2xl font-bold mb-3">
-              ব্যাচ–০৪ (ছেলে)
+              ব্যাচ–০৬ (ছেলে)
             </h3>
             <p className="text-lg mb-1">বাংলাদেশ সময় রাত ১০টা থেকে</p>
-            <p className="text-base opacity-90">শনিবার, সোমবার ও বুধবার</p>
+            <p className="text-base opacity-90">রবি, মঙ্গল, বৃহ: ও জুম্মাবার</p>
           </div>
         </div>
       </Container>

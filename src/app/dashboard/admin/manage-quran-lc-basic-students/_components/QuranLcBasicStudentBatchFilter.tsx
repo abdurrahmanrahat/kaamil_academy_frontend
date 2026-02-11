@@ -73,6 +73,8 @@ const QuranLcBasicStudentBatchFilter = () => {
           <SelectItem value="batch-02">Batch 02</SelectItem>
           <SelectItem value="batch-03">Batch 03</SelectItem>
           <SelectItem value="batch-04">Batch 04</SelectItem>
+          <SelectItem value="batch-05">Batch 05</SelectItem>
+          <SelectItem value="batch-06">Batch 06</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
